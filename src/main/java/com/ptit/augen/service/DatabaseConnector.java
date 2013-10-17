@@ -2,6 +2,8 @@ package com.ptit.augen.service;
 
 import com.ptit.augen.model.Field;
 import com.ptit.augen.model.Table;
+import com.ptit.augen.ultility.Constants;
+import com.ptit.augen.ultility.GlobalVariables;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ public class DatabaseConnector
         return "hello";
     }
 
-    @RequestMapping(value = "/createConnect", params = {"url", "username", "password"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/CreateConnect", params = {"url", "username", "password"}, method = RequestMethod.GET)
     public
     @ResponseBody
     String createConection(@RequestParam String url, @RequestParam String username, @RequestParam String password) throws JSONException
@@ -51,6 +53,22 @@ public class DatabaseConnector
         }
         connectionStatus.put("success", false);
         return connectionStatus.toString();
+    }
+
+    @RequestMapping(value = "/ViewCurrentConnection", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String ViewCurrentConnection()
+    {
+        if (GlobalVariables.Status == Constants.ConnectionEmpty)
+        {
+            return "Connection string is empty ! Plesae setup new connection !";
+        }
+        else if (GlobalVariables.Status == Constants.ConnectionError)
+        {
+            return "Connection error ! Plesae setup new connection !";
+        }
+        return GlobalVariables.ConnString;
     }
 
 //    @RequestMapping(value = "/getTable", method = RequestMethod.GET)
