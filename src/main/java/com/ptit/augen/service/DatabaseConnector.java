@@ -32,19 +32,28 @@ public class DatabaseConnector
         return "hello";
     }
 
-    @RequestMapping(value = "/CreateConnect", params = {"url", "username", "password"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/Connection/ConnectPostgres", params = {"provider", "servername", "databasename", "username", "password"}, method = RequestMethod.GET)
     public
     @ResponseBody
-    String createConection(@RequestParam String url, @RequestParam String username, @RequestParam String password) throws JSONException
+    String createConection(@RequestParam String provider, @RequestParam String servername, @RequestParam String databasename, @RequestParam String username, @RequestParam String password) throws JSONException
     {
         JSONObject connectionStatus = new JSONObject();
         try
         {
+//            jdbc:postgresql://host:port/database
             Class.forName("org.postgresql.Driver");
+            String url = "jdbc:" + provider + "://" + servername + "/" + databasename;
             Connection connection = DriverManager.getConnection(url, username, password);
             if (connection != null)
             {
                 connectionStatus.put("success", true);
+                GlobalVariables.Status = Constants.ConnectionSuccess;
+                GlobalVariables.UserID = username;
+                GlobalVariables.Password = password;
+                GlobalVariables.ProviderString = provider;
+                GlobalVariables.ServerName = servername;
+                GlobalVariables.ConnString = url;
+                GlobalVariables.InitialCatalog = databasename;
                 return connectionStatus.toString();
             }
         }
@@ -52,13 +61,14 @@ public class DatabaseConnector
         {
         }
         connectionStatus.put("success", false);
+        GlobalVariables.Status = Constants.ConnectionError;
         return connectionStatus.toString();
     }
 
-    @RequestMapping(value = "/ViewCurrentConnection", method = RequestMethod.GET)
+    @RequestMapping(value = "/Connection/ViewCurrentConnection", method = RequestMethod.GET)
     public
     @ResponseBody
-    String ViewCurrentConnection()
+    String viewCurrentConnection()
     {
         if (GlobalVariables.Status == Constants.ConnectionEmpty)
         {
@@ -71,13 +81,17 @@ public class DatabaseConnector
         return GlobalVariables.ConnString;
     }
 
-//    @RequestMapping(value = "/getTable", method = RequestMethod.GET)
-//    public
-//    @ResponseBody
-//    String createConection() throws JSONException
-//    {
-//
-//    }
+    @RequestMapping(value = "/Connection/LoadDatabase", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String loadDatabase() throws JSONException
+    {
+//        JSONObject loadDatabaseResponse = new JSONObject();
+//        if (GlobalVariables.Status == Constants.ConnectionEmpty){
+//            loadDatabaseResponse.put("status", "empty");
+//        }
+        return null;
+    }
 
     public List<Table> getTables(Connection connection) throws SQLException
     {
