@@ -4,6 +4,7 @@ import com.ptit.augen.model.Field;
 import com.ptit.augen.model.Table;
 import com.ptit.augen.ultility.Constants;
 import com.ptit.augen.ultility.GlobalVariables;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -119,7 +120,7 @@ public class DatabaseConnector
         }
 
         loadDatabaseResponse.put("status", "success");
-        loadDatabaseResponse.put("data", new ArrayList());
+        loadDatabaseResponse.put("data", tables);
         return loadDatabaseResponse.toString();
     }
 
@@ -159,29 +160,12 @@ public class DatabaseConnector
             {
                 Field field = new Field();
 
-//                System.out.println(resultSetColumn.getString(1));
-//                System.out.println(resultSetColumn.getString(2));       // public
-//                System.out.println(resultSetColumn.getString(3));      //  name table
-//                System.out.println(resultSetColumn.getString(4));        // name field
-//                System.out.println(resultSetColumn.getString(5));       //
-//                System.out.println(resultSetColumn.getString(6));       // type field
-//                System.out.println(resultSetColumn.getString(7));       // max size field
-//                System.out.println(resultSetColumn.getString(8));
-//                System.out.println(resultSetColumn.getString(9));
-//                System.out.println(resultSetColumn.getString(10));
-//                System.out.println(resultSetColumn.getString(11));
-//                System.out.println(resultSetColumn.getString(12));
-//                System.out.println(resultSetColumn.getString(13));
-//                System.out.println(resultSetColumn.getString(14));
-//                System.out.println(resultSetColumn.getString(15));
-//                System.out.println("=============================");
-
                 String columnName = resultSetColumn.getString(4);
                 String columnType = resultSetColumn.getString(6);
 
                 field.setFieldName(columnName);  // 1. none 2. .. 3. .. 4. column name 5. .. 6. type data
                 field.setFieldType(columnType);
-                setPrimaKeyField(field, columnName, fieldPrimaryKeyName);
+                field.setIsKey(checkPrimaryKey(columnName, fieldPrimaryKeyName));
 
                 fields.add(field);
             }
@@ -191,15 +175,50 @@ public class DatabaseConnector
         return metaTableList;
     }
 
-    private void setPrimaKeyField(Field field, String columnName, String fieldPrimaryKeyName)
+    private boolean checkPrimaryKey(String columnName, String fieldPrimaryKeyName)
     {
         if (fieldPrimaryKeyName.equals(columnName))
         {
-            field.setIsKey(true);
+            return true;
         }
-        else
+        return false;
+    }
+
+    @RequestMapping(value = "/Connection/GetListFieldByTable", params = {"TableName"}, method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getListFieldByTable(@RequestParam String TableName) throws SQLException, JSONException
+    {
+        JSONArray fieldArray = new JSONArray();
+        String url = "jdbc:" + GlobalVariables.ProviderString + "://" + GlobalVariables.ServerName + "/" + GlobalVariables.InitialCatalog;
+        Connection connection = DriverManager.getConnection(url, GlobalVariables.UserID, GlobalVariables.Password);
+        DatabaseMetaData dataBaseMetaData = connection.getMetaData();
+        String fieldPrimaryKeyName = null;
+        ResultSet resultSetPrimaryKey = dataBaseMetaData.getPrimaryKeys("", "", TableName);
+        while (resultSetPrimaryKey.next())
         {
-            field.setIsKey(false);
+            fieldPrimaryKeyName = resultSetPrimaryKey.getString("COLUMN_NAME");
         }
+
+        ResultSet resultSetColumn = dataBaseMetaData.getColumns(null, null, TableName, "%");
+        List<Field> fields = new ArrayList<Field>();
+        while (resultSetColumn.next())
+        {
+            JSONObject fieldJSON = new JSONObject();
+            Field field = new Field();
+            String columnName = resultSetColumn.getString(4);
+            String columnType = resultSetColumn.getString(6);
+
+            field.setFieldName(columnName);
+            field.setFieldType(columnType);
+            field.setIsKey(checkPrimaryKey(columnName, fieldPrimaryKeyName));
+
+            fieldJSON.put("columnName", field.getFieldName());
+            fieldJSON.put("columnType", field.getFieldType());
+            fieldJSON.put("isKey", field.getIsKey());
+
+            fieldArray.put(fieldJSON);
+        }
+        return fieldArray.toString();
     }
 }
