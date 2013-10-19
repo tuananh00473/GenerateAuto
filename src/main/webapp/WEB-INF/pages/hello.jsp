@@ -30,6 +30,5 @@
 
 </head>
 <body>
-<a href=""><img src="ExtJsApp/resources/icons/add.png" alt=""/></a>
 </body>
 </html>

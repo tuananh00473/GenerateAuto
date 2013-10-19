@@ -84,18 +84,57 @@ public class DatabaseConnector
     @RequestMapping(value = "/Connection/LoadDatabase", method = RequestMethod.GET)
     public
     @ResponseBody
-    String loadDatabase() throws JSONException
+    String loadDatabase() throws JSONException, SQLException
     {
-//        JSONObject loadDatabaseResponse = new JSONObject();
-//        if (GlobalVariables.Status == Constants.ConnectionEmpty){
-//            loadDatabaseResponse.put("status", "empty");
-//        }
-        return null;
+        JSONObject loadDatabaseResponse = new JSONObject();
+        if (GlobalVariables.Status == Constants.ConnectionEmpty)
+        {
+            loadDatabaseResponse.put("status", "empty");
+            loadDatabaseResponse.put("data", new ArrayList());
+            return loadDatabaseResponse.toString();
+        }
+        if (GlobalVariables.Status == Constants.ConnectionError)
+        {
+            loadDatabaseResponse.put("status", "error");
+            loadDatabaseResponse.put("data", new ArrayList());
+            return loadDatabaseResponse.toString();
+        }
+        String url = "jdbc:" + GlobalVariables.ProviderString + "://" + GlobalVariables.ServerName + "/" + GlobalVariables.InitialCatalog;
+        Connection connection = DriverManager.getConnection(url, GlobalVariables.UserID, GlobalVariables.Password);
+
+        List<Table> tables = getTables(connection);
+        GlobalVariables.FolderName = "/Temp";
+        for (Table table : tables)
+        {
+            List<Field> listNormalFields = new ArrayList<Field>();
+            List<Field> listFullFields = new ArrayList<Field>();
+            for (Field field : table.getFields())
+            {
+                if (field.getIsKey() != true)
+                {
+                    listNormalFields.add(field);
+                }
+                listFullFields.add(field);
+            }
+        }
+
+        loadDatabaseResponse.put("status", "success");
+        loadDatabaseResponse.put("data", new ArrayList());
+        return loadDatabaseResponse.toString();
     }
 
     public List<Table> getTables(Connection connection) throws SQLException
     {
         DatabaseMetaData dataBaseMetaData = connection.getMetaData();
+
+        //productName
+        String productName = dataBaseMetaData.getDatabaseProductName();
+        System.out.println(productName);
+
+        //productVersion
+        String productVersion = dataBaseMetaData.getDatabaseProductVersion();
+        System.out.println(productVersion);
+
         List<Table> metaTableList = new ArrayList<Table>();
 
         String[] types = {"TABLE"};
@@ -107,19 +146,19 @@ public class DatabaseConnector
             String tableName = resultSetTable.getString(3); // 1: none 2: schema 3: table name 4: table type (TABLE, VIEW)
             table.setTableName(tableName);
 
-//            ResultSet resultSetPrimaryKey = dataBaseMetaData.getPrimaryKeys("", "", tableName);
-//            while (resultSetPrimaryKey.next())
-//            {
-//                table.setNamePrimaryKey(resultSetPrimaryKey.getString("COLUMN_NAME"));
-//            }
+            String fieldPrimaryKeyName = null;
+            ResultSet resultSetPrimaryKey = dataBaseMetaData.getPrimaryKeys("", "", tableName);
+            while (resultSetPrimaryKey.next())
+            {
+                fieldPrimaryKeyName = resultSetPrimaryKey.getString("COLUMN_NAME");
+            }
 
             ResultSet resultSetColumn = dataBaseMetaData.getColumns(null, null, tableName, "%");
             List<Field> fields = new ArrayList<Field>();
             while (resultSetColumn.next())
             {
                 Field field = new Field();
-//                String column0 = resultSetColumn.getString(0);
-//
+
 //                System.out.println(resultSetColumn.getString(1));
 //                System.out.println(resultSetColumn.getString(2));       // public
 //                System.out.println(resultSetColumn.getString(3));      //  name table
@@ -142,17 +181,25 @@ public class DatabaseConnector
 
                 field.setFieldName(columnName);  // 1. none 2. .. 3. .. 4. column name 5. .. 6. type data
                 field.setFieldType(columnType);
-                fields.add(field);
+                setPrimaKeyField(field, columnName, fieldPrimaryKeyName);
 
-//                if (metaTable.getNamePrimaryKey().equals(columnName))
-//                {
-//                    metaTable.setTypePrimaryKey(columnType);
-//                    metaColumn.setPrimaryKey(true);
-//                }
+                fields.add(field);
             }
             table.setFields(fields);
             metaTableList.add(table);
         }
         return metaTableList;
+    }
+
+    private void setPrimaKeyField(Field field, String columnName, String fieldPrimaryKeyName)
+    {
+        if (fieldPrimaryKeyName.equals(columnName))
+        {
+            field.setIsKey(true);
+        }
+        else
+        {
+            field.setIsKey(false);
+        }
     }
 }
