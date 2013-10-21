@@ -4,6 +4,7 @@ import com.ptit.augen.model.Field;
 import com.ptit.augen.model.Table;
 import com.ptit.augen.ultility.Constants;
 import com.ptit.augen.ultility.GlobalVariables;
+import com.ptit.augen.ultility.StringExecuteConverter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,28 +34,28 @@ public class DatabaseConnector
         return "hello";
     }
 
-    @RequestMapping(value = "/Connection/ConnectPostgres", params = {"SQLProviderNameId", "SQLServerNameId", "SQLInitialCatalogId", "SQLUserNameId", "SQLPasswordId"}, method = RequestMethod.POST)
+    @RequestMapping(value = "/Connection/ConnectPostgres", params = {"PostgresProviderNameId", "PostgresNameId", "PostgresInitialCatalogId", "PostgresUserNameId", "PostgresPasswordId"}, method = RequestMethod.POST)
     public
     @ResponseBody
-    String createConection(@RequestParam String SQLProviderNameId, @RequestParam String SQLServerNameId, @RequestParam String SQLInitialCatalogId, @RequestParam String SQLUserNameId, @RequestParam String SQLPasswordId) throws JSONException
+    String createConection(@RequestParam String PostgresProviderNameId, @RequestParam String PostgresNameId, @RequestParam String PostgresInitialCatalogId, @RequestParam String PostgresUserNameId, @RequestParam String PostgresPasswordId) throws JSONException
     {
         JSONObject connectionStatus = new JSONObject();
         try
         {
-//            jdbc:postgresql://host:port/database
             Class.forName("org.postgresql.Driver");
-            String url = SQLProviderNameId + "://" + SQLServerNameId + "/" + SQLInitialCatalogId;
-            Connection connection = DriverManager.getConnection(url, SQLUserNameId, SQLPasswordId);
+            String url = PostgresProviderNameId + "://" + PostgresNameId + "/" + PostgresInitialCatalogId;
+            Connection connection = DriverManager.getConnection(url, PostgresUserNameId, PostgresPasswordId);
             if (connection != null)
             {
                 connectionStatus.put("success", true);
                 GlobalVariables.Status = Constants.ConnectionSuccess;
-                GlobalVariables.UserID = SQLUserNameId;
-                GlobalVariables.Password = SQLPasswordId;
-                GlobalVariables.ProviderString = SQLProviderNameId;
-                GlobalVariables.ServerName = SQLServerNameId;
+                GlobalVariables.UserID = PostgresUserNameId;
+                GlobalVariables.Password = PostgresPasswordId;
+                GlobalVariables.ProviderString = PostgresProviderNameId;
+                GlobalVariables.ServerName = PostgresNameId;
                 GlobalVariables.ConnString = url;
-                GlobalVariables.InitialCatalog = SQLInitialCatalogId;
+                GlobalVariables.InitialCatalog = PostgresInitialCatalogId;
+                GlobalVariables.connection = connection;
                 return connectionStatus.toString();
             }
         }
@@ -100,10 +101,9 @@ public class DatabaseConnector
             loadDatabaseResponse.put("data", new ArrayList());
             return loadDatabaseResponse.toString();
         }
-        String url = "jdbc:" + GlobalVariables.ProviderString + "://" + GlobalVariables.ServerName + "/" + GlobalVariables.InitialCatalog;
-        Connection connection = DriverManager.getConnection(url, GlobalVariables.UserID, GlobalVariables.Password);
+        Connection connection = GlobalVariables.connection;
 
-        List<Table> tables = getTables(connection);
+        ArrayList<Table> tables = getTables(connection);
         GlobalVariables.FolderName = "/Temp";
         for (Table table : tables)
         {
@@ -124,7 +124,7 @@ public class DatabaseConnector
         return loadDatabaseResponse.toString();
     }
 
-    public List<Table> getTables(Connection connection) throws SQLException
+    public ArrayList<Table> getTables(Connection connection) throws SQLException
     {
         DatabaseMetaData dataBaseMetaData = connection.getMetaData();
 
@@ -136,7 +136,7 @@ public class DatabaseConnector
         String productVersion = dataBaseMetaData.getDatabaseProductVersion();
         System.out.println(productVersion);
 
-        List<Table> metaTableList = new ArrayList<Table>();
+        ArrayList<Table> metaTableList = new ArrayList<Table>();
 
         String[] types = {"TABLE"};
         ResultSet resultSetTable = dataBaseMetaData.getTables(null, null, "%", types);
@@ -155,7 +155,7 @@ public class DatabaseConnector
             }
 
             ResultSet resultSetColumn = dataBaseMetaData.getColumns(null, null, tableName, "%");
-            List<Field> fields = new ArrayList<Field>();
+            ArrayList<Field> fields = new ArrayList<Field>();
             while (resultSetColumn.next())
             {
                 Field field = new Field();
@@ -164,9 +164,49 @@ public class DatabaseConnector
                 String columnType = resultSetColumn.getString(6);
 
                 field.setFieldName(columnName);  // 1. none 2. .. 3. .. 4. column name 5. .. 6. type data
-                field.setFieldType(columnType);
+                field.setFieldType(StringExecuteConverter.convertTypeOfDataToExtentionJSType(columnType));
+                field.setServerFieldType(StringExecuteConverter.convertTypeOfDataToJavaType(columnType));
                 field.setIsKey(checkPrimaryKey(columnName, fieldPrimaryKeyName));
 
+                field.setIsInt(false);
+                field.setIsLong(false);
+                field.setIsBoolean(false);
+                field.setIsFloat(false);
+                field.setIsString(false);
+
+                if (field.getFieldType().equals("int"))
+                {
+                    field.setIsInt(true);
+                }
+                else if (field.getFieldType().equals("auto"))
+                {
+                    field.setIsLong(true);
+                }
+                else if (field.getFieldType().equals("boolean"))
+                {
+                    field.setIsBoolean(true);
+                }
+                else if (field.getFieldType().equals("double"))
+                {
+                    field.setIsFloat(true);
+                }
+                else if (field.getFieldType().equals("string"))
+                {
+                    field.setIsString(true);
+                }
+
+                if (!field.getFieldName().isEmpty() && !field.getIsKey())
+                {
+                    field.setLabelName(field.getFieldName());
+                    field.setFieldWidth("500");
+                    field.setFieldHeight("28");
+                    field.setItemType(Constants.DATA_FIELD_TYPE.get(0));
+                    field.setAllowBlank("false");
+                    field.setAllowBlankBoolean(false);
+                    field.setIsHTMLEditor(false);
+                    field.setHasSearch(false);
+                    field.setSearchType("");
+                }
                 fields.add(field);
             }
             table.setFields(fields);
@@ -184,14 +224,13 @@ public class DatabaseConnector
         return false;
     }
 
-    @RequestMapping(value = "/Connection/GetListFieldByTable", params = {"TableName"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/Connection/GetListFieldByTable", params = {"TableName"}, method = RequestMethod.POST)
     public
     @ResponseBody
     String getListFieldByTable(@RequestParam String TableName) throws SQLException, JSONException
     {
         JSONArray fieldArray = new JSONArray();
-        String url = "jdbc:" + GlobalVariables.ProviderString + "://" + GlobalVariables.ServerName + "/" + GlobalVariables.InitialCatalog;
-        Connection connection = DriverManager.getConnection(url, GlobalVariables.UserID, GlobalVariables.Password);
+        Connection connection = GlobalVariables.connection;
         DatabaseMetaData dataBaseMetaData = connection.getMetaData();
         String fieldPrimaryKeyName = null;
         ResultSet resultSetPrimaryKey = dataBaseMetaData.getPrimaryKeys("", "", TableName);

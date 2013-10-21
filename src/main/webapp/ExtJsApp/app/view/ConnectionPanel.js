@@ -24,8 +24,8 @@ Ext.define('AM.view.ConnectionPanel', {
                     items: [
                         {
                             xtype: 'textfield',
-                            itemId: 'SQLProviderNameId',
-                            name: 'SQLProviderNameId',
+                            itemId: 'PostgresProviderNameId',
+                            name: 'PostgresProviderNameId',
                             value: 'jdbc:postgresql',
                             labelWidth: 150,
                             width: 500,
@@ -35,9 +35,9 @@ Ext.define('AM.view.ConnectionPanel', {
                         },
                         {
                             xtype: 'textfield',
-                            itemId: 'SQLServerNameId',
-                            name: 'SQLServerNameId',
-                            value: '172.16.24.128:5432',
+                            itemId: 'PostgresNameId',
+                            name: 'PostgresNameId',
+                            value: 'localhost:5432',
                             labelWidth: 150,
                             width: 500,
                             allowBlank: false,
@@ -46,8 +46,8 @@ Ext.define('AM.view.ConnectionPanel', {
                         },
                         {
                             xtype: 'textfield',
-                            itemId: 'SQLInitialCatalogId',
-                            name: 'SQLInitialCatalogId',
+                            itemId: 'PostgresInitialCatalogId',
+                            name: 'PostgresInitialCatalogId',
                             value: 'simple_db',
                             labelWidth: 150,
                             width: 500,
@@ -57,8 +57,8 @@ Ext.define('AM.view.ConnectionPanel', {
                         },
                         {
                             xtype: 'textfield',
-                            itemId: 'SQLUserNameId',
-                            name: 'SQLUserNameId',
+                            itemId: 'PostgresUserNameId',
+                            name: 'PostgresUserNameId',
                             value: 'admin',
                             labelWidth: 150,
                             width: 500,
@@ -69,8 +69,8 @@ Ext.define('AM.view.ConnectionPanel', {
                         {
                             xtype: 'textfield',
                             inputType: 'password',
-                            itemId: 'SQLPasswordId',
-                            name: 'SQLPasswordId',
+                            itemId: 'PostgresPasswordId',
+                            name: 'PostgresPasswordId',
                             value: '123456',
                             labelWidth: 150,
                             width: 500,

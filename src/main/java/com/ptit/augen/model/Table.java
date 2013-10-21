@@ -1,6 +1,6 @@
 package com.ptit.augen.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * User: AnhNT
@@ -10,7 +10,7 @@ import java.util.List;
 public class Table
 {
     private String TableName;
-    private List<Field> Fields;
+    private ArrayList<Field> Fields;
 
     public String getTableName()
     {
@@ -22,12 +22,12 @@ public class Table
         TableName = tableName;
     }
 
-    public List<Field> getFields()
+    public ArrayList<Field> getFields()
     {
         return Fields;
     }
 
-    public void setFields(List<Field> fields)
+    public void setFields(ArrayList<Field> fields)
     {
         Fields = fields;
     }

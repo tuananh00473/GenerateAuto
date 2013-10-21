@@ -27,7 +27,7 @@ public class StringExecuteConverter
         return stringConverted;
     }
 
-    public static String convertTypeOfData(String typeDataInput)
+    public static String convertTypeOfDataToJavaType(String typeDataInput)
     {
         if (compare(typeDataInput, "INT") || compare(typeDataInput, "numeric"))
         {
@@ -56,19 +56,34 @@ public class StringExecuteConverter
         return typeDataInput;
     }
 
-     // Convert to ExtJs type
-    /*private String convertTypeData(String type)
+    public static String convertTypeOfDataToExtentionJSType(String typeDataInput)
     {
-        switch (type)
+        if (compare(typeDataInput, "INT") || compare(typeDataInput, "numeric"))
         {
-            case "System.Int32": return "int";
-            case "System.Int64": return "auto";
-            case "System.String": return "string";
-            case "System.Boolean": return "bool";
-            case "System.Double": return "float";
+            return "int";
         }
-        return "string";
-    }*/
+        if (compare(typeDataInput, "VARCHAR") || compare(typeDataInput, "TEXT") || compare(typeDataInput, "bpchar"))
+        {
+            return "string";
+        }
+        if (compare(typeDataInput, "BIGINT") || compare(typeDataInput, "int8") || compare(typeDataInput, "bigserial") || compare(typeDataInput, "int4") || compare(typeDataInput, "long"))
+        {
+            return "auto";
+        }
+        if (compare(typeDataInput, "BOOLEAN") || compare(typeDataInput, "bool"))
+        {
+            return "boolean";
+        }
+        if (compare(typeDataInput, "DOUBLE"))
+        {
+            return "double";
+        }
+        if (compare(typeDataInput, "DATE") || compare(typeDataInput, "DATETIME") || compare(typeDataInput, "timestamp") || compare(typeDataInput, "timestamptz"))
+        {
+            return "date";
+        }
+        return typeDataInput;
+    }
 
     public static boolean compare(String string, String otherString)
     {
