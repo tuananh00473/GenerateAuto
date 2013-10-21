@@ -8,18 +8,18 @@ package com.ptit.augen.model;
 public class Field
 {
     private String FieldName;
-    private String FieldType;
-    private String ServerFieldType;
-    private Boolean IsKey;
+    private String FieldType;   // Type in ExtJs
+    private String ServerFieldType;  // Type in Java
+    private Boolean IsKey;   // Primary Key
     private Boolean IsInt;
     private Boolean IsLong;
     private Boolean IsBoolean;
     private Boolean IsFloat;
     private Boolean IsString;
 
-    private String LabelName;
-    private String FieldWidth;
-    private String FieldHeight;
+    private String LabelName;  // default set =  FieldName
+    private String FieldWidth; // 500
+    private String FieldHeight;      //28
     private String ItemType;
     private int ItemTypeId;
     private String AllowBlank;

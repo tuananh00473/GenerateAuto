@@ -56,6 +56,20 @@ public class StringExecuteConverter
         return typeDataInput;
     }
 
+     // Convert to ExtJs type
+    /*private String convertTypeData(String type)
+    {
+        switch (type)
+        {
+            case "System.Int32": return "int";
+            case "System.Int64": return "auto";
+            case "System.String": return "string";
+            case "System.Boolean": return "bool";
+            case "System.Double": return "float";
+        }
+        return "string";
+    }*/
+
     public static boolean compare(String string, String otherString)
     {
         if (string.toLowerCase().equals(otherString.toLowerCase()))

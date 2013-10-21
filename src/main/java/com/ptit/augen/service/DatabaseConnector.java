@@ -33,28 +33,28 @@ public class DatabaseConnector
         return "hello";
     }
 
-    @RequestMapping(value = "/Connection/ConnectPostgres", params = {"provider", "servername", "databasename", "username", "password"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/Connection/ConnectPostgres", params = {"SQLProviderNameId", "SQLServerNameId", "SQLInitialCatalogId", "SQLUserNameId", "SQLPasswordId"}, method = RequestMethod.POST)
     public
     @ResponseBody
-    String createConection(@RequestParam String provider, @RequestParam String servername, @RequestParam String databasename, @RequestParam String username, @RequestParam String password) throws JSONException
+    String createConection(@RequestParam String SQLProviderNameId, @RequestParam String SQLServerNameId, @RequestParam String SQLInitialCatalogId, @RequestParam String SQLUserNameId, @RequestParam String SQLPasswordId) throws JSONException
     {
         JSONObject connectionStatus = new JSONObject();
         try
         {
 //            jdbc:postgresql://host:port/database
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:" + provider + "://" + servername + "/" + databasename;
-            Connection connection = DriverManager.getConnection(url, username, password);
+            String url = SQLProviderNameId + "://" + SQLServerNameId + "/" + SQLInitialCatalogId;
+            Connection connection = DriverManager.getConnection(url, SQLUserNameId, SQLPasswordId);
             if (connection != null)
             {
                 connectionStatus.put("success", true);
                 GlobalVariables.Status = Constants.ConnectionSuccess;
-                GlobalVariables.UserID = username;
-                GlobalVariables.Password = password;
-                GlobalVariables.ProviderString = provider;
-                GlobalVariables.ServerName = servername;
+                GlobalVariables.UserID = SQLUserNameId;
+                GlobalVariables.Password = SQLPasswordId;
+                GlobalVariables.ProviderString = SQLProviderNameId;
+                GlobalVariables.ServerName = SQLServerNameId;
                 GlobalVariables.ConnString = url;
-                GlobalVariables.InitialCatalog = databasename;
+                GlobalVariables.InitialCatalog = SQLInitialCatalogId;
                 return connectionStatus.toString();
             }
         }
