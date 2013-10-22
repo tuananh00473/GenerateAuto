@@ -3,6 +3,7 @@ package com.ptit.augen.ultility;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.regex.Matcher;
 
 /**
  * User: Anhnt
@@ -31,7 +32,7 @@ public class WriteFileJava
 
     public static void makePath(String path)
     {
-        String regex = "/";
+        String regex = Matcher.quoteReplacement("\\");
         String[] subPath = path.split(regex);
         String prePath = subPath[0] + regex;
         for (int i = 1; i < subPath.length; i++)

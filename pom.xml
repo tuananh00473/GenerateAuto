@@ -74,6 +74,13 @@
             <artifactId>json</artifactId>
             <version>20080701</version>
         </dependency>
+
+        <!-- String template -->
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>stringtemplate</artifactId>
+            <version>3.2</version>
+        </dependency>
     </dependencies>
 
     <build>

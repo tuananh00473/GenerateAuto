@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: AnhNT
@@ -107,8 +106,8 @@ public class DatabaseConnector
         GlobalVariables.FolderName = "/Temp";
         for (Table table : tables)
         {
-            List<Field> listNormalFields = new ArrayList<Field>();
-            List<Field> listFullFields = new ArrayList<Field>();
+            ArrayList<Field> listNormalFields = new ArrayList<Field>();
+            ArrayList<Field> listFullFields = new ArrayList<Field>();
             for (Field field : table.getFields())
             {
                 if (field.getIsKey() != true)
@@ -117,6 +116,16 @@ public class DatabaseConnector
                 }
                 listFullFields.add(field);
             }
+            StringTemplateService.generateModel(table.getTableName(), listFullFields);
+            StringTemplateService.generateStore(table.getTableName());
+            StringTemplateService.generateController(table.getTableName(), listFullFields);
+            StringTemplateService.generateScreenList(table.getTableName(), listNormalFields);
+            StringTemplateService.generateScreenAdd(table.getTableName(), listNormalFields);
+            StringTemplateService.generateScreenEdit(table.getTableName(), listNormalFields);
+
+            StringTemplateService.generateServerModel(table.getTableName(), listFullFields);
+            StringTemplateService.generateServerDAO(table.getTableName(), listNormalFields);
+            StringTemplateService.generateServerController(table.getTableName(), listFullFields);
         }
 
         jsonResult.setStatus("success");

@@ -87,10 +87,6 @@ public class StringExecuteConverter
 
     public static boolean compare(String string, String otherString)
     {
-        if (string.toLowerCase().equals(otherString.toLowerCase()))
-        {
-            return true;
-        }
-        return false;
+        return string.toLowerCase().equals(otherString.toLowerCase());
     }
 }
