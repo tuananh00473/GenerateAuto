@@ -1,6 +1,7 @@
 package com.ptit.augen.service;
 
 import com.ptit.augen.model.Field;
+import com.ptit.augen.model.JsonResult;
 import com.ptit.augen.model.Table;
 import com.ptit.augen.ultility.Constants;
 import com.ptit.augen.ultility.GlobalVariables;
@@ -86,20 +87,22 @@ public class DatabaseConnector
     @RequestMapping(value = "/Connection/LoadDatabase", method = RequestMethod.GET)
     public
     @ResponseBody
-    String loadDatabase() throws JSONException, SQLException
+    JsonResult loadDatabase() throws JSONException, SQLException
     {
         JSONObject loadDatabaseResponse = new JSONObject();
         if (GlobalVariables.Status == Constants.ConnectionEmpty)
         {
             loadDatabaseResponse.put("status", "empty");
             loadDatabaseResponse.put("data", new ArrayList());
-            return loadDatabaseResponse.toString();
+//            return loadDatabaseResponse;
+            return null;
         }
         if (GlobalVariables.Status == Constants.ConnectionError)
         {
             loadDatabaseResponse.put("status", "error");
             loadDatabaseResponse.put("data", new ArrayList());
-            return loadDatabaseResponse.toString();
+//            return loadDatabaseResponse;
+            return null;
         }
         Connection connection = GlobalVariables.connection;
 
@@ -121,7 +124,11 @@ public class DatabaseConnector
 
         loadDatabaseResponse.put("status", "success");
         loadDatabaseResponse.put("data", tables);
-        return loadDatabaseResponse.toString();
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setStatus("success");
+        jsonResult.setData(tables);
+//        return loadDatabaseResponse;
+        return jsonResult;
     }
 
     public ArrayList<Table> getTables(Connection connection) throws SQLException

@@ -1,5 +1,7 @@
 package com.ptit.augen.model;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * User: AnhNT
  * Date: 10/16/13
@@ -31,6 +33,7 @@ public class Field
     private String SearchType;
     private int SearchTypeId;
 
+    @JsonProperty("FieldName")
     public String getFieldName()
     {
         return FieldName;
@@ -41,6 +44,7 @@ public class Field
         FieldName = fieldName;
     }
 
+    @JsonProperty("FieldType")
     public String getFieldType()
     {
         return FieldType;
@@ -51,6 +55,7 @@ public class Field
         FieldType = fieldType;
     }
 
+    @JsonProperty("ServerFieldType")
     public String getServerFieldType()
     {
         return ServerFieldType;
@@ -61,6 +66,7 @@ public class Field
         ServerFieldType = serverFieldType;
     }
 
+    @JsonProperty("IsKey")
     public Boolean getIsKey()
     {
         return IsKey;
@@ -71,6 +77,7 @@ public class Field
         IsKey = isKey;
     }
 
+    @JsonProperty("IsInt")
     public Boolean getIsInt()
     {
         return IsInt;
@@ -81,6 +88,7 @@ public class Field
         IsInt = isInt;
     }
 
+    @JsonProperty("IsLong")
     public Boolean getIsLong()
     {
         return IsLong;
@@ -91,6 +99,7 @@ public class Field
         IsLong = isLong;
     }
 
+    @JsonProperty("IsBoolean")
     public Boolean getIsBoolean()
     {
         return IsBoolean;
@@ -101,6 +110,7 @@ public class Field
         IsBoolean = isBoolean;
     }
 
+    @JsonProperty("IsFloat")
     public Boolean getIsFloat()
     {
         return IsFloat;
@@ -111,6 +121,7 @@ public class Field
         IsFloat = isFloat;
     }
 
+    @JsonProperty("IsString")
     public Boolean getIsString()
     {
         return IsString;
@@ -121,6 +132,7 @@ public class Field
         IsString = isString;
     }
 
+    @JsonProperty("LabelName")
     public String getLabelName()
     {
         return LabelName;
@@ -131,6 +143,7 @@ public class Field
         LabelName = labelName;
     }
 
+    @JsonProperty("FieldWidth")
     public String getFieldWidth()
     {
         return FieldWidth;
@@ -141,6 +154,7 @@ public class Field
         FieldWidth = fieldWidth;
     }
 
+    @JsonProperty("FieldHeight")
     public String getFieldHeight()
     {
         return FieldHeight;
@@ -151,6 +165,7 @@ public class Field
         FieldHeight = fieldHeight;
     }
 
+    @JsonProperty("ItemType")
     public String getItemType()
     {
         return ItemType;
@@ -161,6 +176,7 @@ public class Field
         ItemType = itemType;
     }
 
+    @JsonProperty("ItemTypeId")
     public int getItemTypeId()
     {
         return ItemTypeId;
@@ -171,6 +187,7 @@ public class Field
         ItemTypeId = itemTypeId;
     }
 
+    @JsonProperty("AllowBlank")
     public String getAllowBlank()
     {
         return AllowBlank;
@@ -181,6 +198,7 @@ public class Field
         AllowBlank = allowBlank;
     }
 
+    @JsonProperty("AllowBlankBoolean")
     public Boolean getAllowBlankBoolean()
     {
         return AllowBlankBoolean;
@@ -191,6 +209,7 @@ public class Field
         AllowBlankBoolean = allowBlankBoolean;
     }
 
+    @JsonProperty("AllowBlankBooleanId")
     public int getAllowBlankBooleanId()
     {
         return AllowBlankBooleanId;
@@ -201,6 +220,7 @@ public class Field
         AllowBlankBooleanId = allowBlankBooleanId;
     }
 
+    @JsonProperty("IsHTMLEditor")
     public Boolean getIsHTMLEditor()
     {
         return IsHTMLEditor;
@@ -211,6 +231,7 @@ public class Field
         IsHTMLEditor = isHTMLEditor;
     }
 
+    @JsonProperty("HasSearch")
     public Boolean getHasSearch()
     {
         return HasSearch;
@@ -221,6 +242,7 @@ public class Field
         HasSearch = hasSearch;
     }
 
+    @JsonProperty("HasSearchId")
     public int getHasSearchId()
     {
         return HasSearchId;
@@ -231,6 +253,7 @@ public class Field
         HasSearchId = hasSearchId;
     }
 
+    @JsonProperty("SearchType")
     public String getSearchType()
     {
         return SearchType;
@@ -241,6 +264,7 @@ public class Field
         SearchType = searchType;
     }
 
+    @JsonProperty("SearchTypeId")
     public int getSearchTypeId()
     {
         return SearchTypeId;

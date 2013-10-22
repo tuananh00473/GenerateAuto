@@ -1,5 +1,7 @@
 package com.ptit.augen.model;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,7 @@ public class Table
     private String TableName;
     private ArrayList<Field> Fields;
 
+    @JsonProperty("TableName")
     public String getTableName()
     {
         return TableName;
@@ -22,6 +25,7 @@ public class Table
         TableName = tableName;
     }
 
+    @JsonProperty("Fields")
     public ArrayList<Field> getFields()
     {
         return Fields;
@@ -31,4 +35,5 @@ public class Table
     {
         Fields = fields;
     }
+
 }
