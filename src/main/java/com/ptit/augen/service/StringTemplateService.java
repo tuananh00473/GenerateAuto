@@ -20,14 +20,14 @@ public class StringTemplateService
     public static StringTemplateGroup groupTest = new StringTemplateGroup("groupTest", PATH_TEMPLATE_TEST, DefaultTemplateLexer.class);
     public static StringTemplateGroup groupOther = new StringTemplateGroup("groupOther", PATH_TEMPLATE_OTHER, DefaultTemplateLexer.class);
 
-    public final static String PATH_OUT_PUT_CLIENT_MODEL = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\app\\model\\";
-    public final static String PATH_OUT_PUT_CLIENT_STORE = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\app\\store\\";
-    public final static String PATH_OUT_PUT_CLIENT_CONTROLLER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\app\\controller\\";
-    public final static String PATH_OUT_PUT_CLIENT_SCREEN = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\app\\screen\\";
+    public final static String PATH_OUT_PUT_CLIENT_MODEL = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\app\\model\\";
+    public final static String PATH_OUT_PUT_CLIENT_STORE = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\app\\store\\";
+    public final static String PATH_OUT_PUT_CLIENT_CONTROLLER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\app\\controller\\";
+    public final static String PATH_OUT_PUT_CLIENT_SCREEN = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\app\\screen\\";
 
-    public final static String PATH_OUT_PUT_SERVER_MODEL = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\Models\\";
-    public final static String PATH_OUT_PUT_SERVER_DAO = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\DataAccess\\";
-    public final static String PATH_OUT_PUT_SERVER_CONTROLLER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\sourcegenerated\\Temp\\Controllers\\";
+    public final static String PATH_OUT_PUT_SERVER_MODEL = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\Models\\";
+    public final static String PATH_OUT_PUT_SERVER_DAO = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\DataAccess\\";
+    public final static String PATH_OUT_PUT_SERVER_CONTROLLER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\source generated\\Temp\\Controllers\\";
 
     public static void generateModel(String tableName, ArrayList<Field> listFullFields)
     {
