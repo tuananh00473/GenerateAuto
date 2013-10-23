@@ -127,6 +127,12 @@ public class DatabaseConnector
             StringTemplateService.generateServerDAO(table.getTableName(), listNormalFields);
             StringTemplateService.generateServerController(table.getTableName(), listFullFields);
         }
+        StringTemplateService.generateMenu(tables);
+        StringTemplateService.generateConstant();
+        StringTemplateService.generateVariable();
+        StringTemplateService.generateIndexJS(tables);
+        StringTemplateService.generateViewPort(tables);
+        StringTemplateService.generateIndexHTML();
 
         jsonResult.setStatus("success");
         jsonResult.setData(tables);
