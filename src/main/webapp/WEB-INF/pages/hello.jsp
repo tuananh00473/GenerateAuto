@@ -3,7 +3,7 @@
 <head id="mainBody">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>DeftJs</title>
+    <title>GenerateAuto</title>
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="ExtJsApp/lib/ext/resources/css/ext-all.css"/>
@@ -30,5 +30,6 @@
 
 </head>
 <body>
+<h4>Loading ...</h4>
 </body>
 </html>

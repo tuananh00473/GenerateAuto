@@ -70,6 +70,17 @@ public class StringTemplateService
         WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
     }
 
+    public static void generateMenuController(ArrayList<Table> tables)
+    {
+        StringTemplate template = groupClient.getInstanceOf("menuController");
+        template.setAttribute("tables", tables);
+
+        String content = template.toString();
+        String fileName = "Menu.js";
+
+        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
+    }
+
     public static void generateScreenList(String tableName, ArrayList<Field> listNormalFields)
     {
         StringTemplate template = groupClient.getInstanceOf("list");
@@ -151,7 +162,7 @@ public class StringTemplateService
         template.setAttribute("tables", tables);
 
         String content = template.toString();
-        String fileName = "Topmenu.js";
+        String fileName = "TopMenu.js";
 
         WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEW_MENU, fileName, content);
     }
@@ -161,7 +172,7 @@ public class StringTemplateService
         StringTemplate template = groupOther.getInstanceOf("constant");
 
         String content = template.toString();
-        String fileName = "constant.js";
+        String fileName = "Constant.js";
 
         WriteFileJava.WritToFile(PATH_OUT_PUT_OTHER_COMMON, fileName, content);
     }
@@ -171,7 +182,7 @@ public class StringTemplateService
         StringTemplate template = groupOther.getInstanceOf("variable");
 
         String content = template.toString();
-        String fileName = "variable.js";
+        String fileName = "Variables.js";
 
         WriteFileJava.WritToFile(PATH_OUT_PUT_OTHER_COMMON, fileName, content);
     }
@@ -181,7 +192,7 @@ public class StringTemplateService
         StringTemplate template = groupOther.getInstanceOf("index");
 
         String content = template.toString();
-        String fileName = "index.html";
+        String fileName = "index.jsp";
 
         WriteFileJava.WritToFile(PATH_OUT_PUT_OTHER_INDEX, fileName, content);
     }
@@ -208,23 +219,23 @@ public class StringTemplateService
         WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
     }
 
-    public static void generateHTML()
-    {
-        StringTemplate template = groupTest.getInstanceOf("html");
-
-        String content = template.toString();
-        String fileName = "html.js";
-
-//        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-    }
-
-    public static void generateJavascript()
-    {
-        StringTemplate template = groupTest.getInstanceOf("javascript");
-
-        String content = template.toString();
-        String fileName = "Javascrip.js";
-
-//        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-    }
+//    public static void generateHTML()
+//    {
+//        StringTemplate template = groupTest.getInstanceOf("html");
+//
+//        String content = template.toString();
+//        String fileName = "html.js";
+//
+////        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
+//    }
+//
+//    public static void generateJavascript()
+//    {
+//        StringTemplate template = groupTest.getInstanceOf("javascript");
+//
+//        String content = template.toString();
+//        String fileName = "Javascrip.js";
+//
+////        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
+//    }
 }

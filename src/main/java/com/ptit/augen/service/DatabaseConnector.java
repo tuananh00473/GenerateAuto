@@ -116,6 +116,7 @@ public class DatabaseConnector
                 }
                 listFullFields.add(field);
             }
+            String tableNameUppercase = upperCaseFirst(table.getTableName());
             StringTemplateService.generateModel(table.getTableName(), listFullFields);
             StringTemplateService.generateStore(table.getTableName());
             StringTemplateService.generateController(table.getTableName(), listFullFields);
@@ -123,9 +124,9 @@ public class DatabaseConnector
             StringTemplateService.generateScreenAdd(table.getTableName(), listNormalFields);
             StringTemplateService.generateScreenEdit(table.getTableName(), listNormalFields);
 
-            StringTemplateService.generateServerModel(table.getTableName(), listFullFields);
-            StringTemplateService.generateServerDAO(table.getTableName(), listNormalFields);
-            StringTemplateService.generateServerController(table.getTableName(), listFullFields);
+            StringTemplateService.generateServerModel(tableNameUppercase, listFullFields);
+            StringTemplateService.generateServerDAO(tableNameUppercase, listNormalFields);
+            StringTemplateService.generateServerController(tableNameUppercase, listFullFields);
         }
         StringTemplateService.generateMenu(tables);
         StringTemplateService.generateConstant();
@@ -133,10 +134,19 @@ public class DatabaseConnector
         StringTemplateService.generateIndexJS(tables);
         StringTemplateService.generateViewPort(tables);
         StringTemplateService.generateIndexHTML();
+        StringTemplateService.generateMenuController(tables);
 
         jsonResult.setStatus("success");
         jsonResult.setData(tables);
         return jsonResult;
+    }
+
+    public String upperCaseFirst(String tableName)
+    {
+        String stringLowerCase = tableName.substring(0, 1);
+        String stringUpperCase = stringLowerCase.toUpperCase();
+        tableName = tableName.replaceFirst(stringLowerCase, stringUpperCase);
+        return tableName;
     }
 
     public ArrayList<Table> getTables(Connection connection) throws SQLException
