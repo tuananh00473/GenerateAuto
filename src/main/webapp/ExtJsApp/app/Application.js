@@ -163,6 +163,9 @@ Ext.define("AM.Application", {
 
         function updatePreviewAdd()
         {
+            alert(AM.config.AppConfig.CODE_MIRROR_ADD.getValue());
+            console.log(AM.config.AppConfig.COOKIES.get('TableName'));
+            console.log(AM.config.AppConfig.CODE_MIRROR_ADD.getValue());
             AM.config.AppConfig.MASK.show();
             Ext.Ajax.request({
                 url: '/Connection/UpdateFile',

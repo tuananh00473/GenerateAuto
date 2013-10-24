@@ -2,11 +2,14 @@ package com.ptit.augen.service;
 
 import com.ptit.augen.model.Field;
 import com.ptit.augen.model.Table;
+import com.ptit.augen.ultility.Constants;
 import com.ptit.augen.ultility.GlobalVariables;
+import com.ptit.augen.ultility.JavaWriteFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -20,9 +23,22 @@ import java.util.ArrayList;
 @RequestMapping(value = "/")
 public class MainController
 {
-    @RequestMapping(value = "/Connection/UpdateFile", method = RequestMethod.GET)
-    public String updateFile(ModelMap model)
+    @RequestMapping(value = "/Connection/UpdateFile", params = {"type", "tableName", "content"}, method = RequestMethod.POST)
+    public String updateFile(@RequestParam int type, @RequestParam String tableName, @RequestParam String content)
     {
+        switch (type)
+        {
+            case Constants.ViewTabAdd:
+                JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, "Add" + tableName + ".js", content);
+                break;
+            case Constants.ViewTabEdit:
+                JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, "Edit" + tableName + ".js", content);
+                break;
+            case Constants.ViewTabList:
+                JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, "List" + tableName + ".js", content);
+                break;
+
+        }
         return "hello";
     }
 

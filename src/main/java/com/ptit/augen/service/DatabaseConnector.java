@@ -5,6 +5,7 @@ import com.ptit.augen.model.JsonResult;
 import com.ptit.augen.model.Table;
 import com.ptit.augen.ultility.Constants;
 import com.ptit.augen.ultility.GlobalVariables;
+import com.ptit.augen.ultility.JavaCopyFileFilterByType;
 import com.ptit.augen.ultility.StringExecuteConverter;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,6 +127,13 @@ public class DatabaseConnector
             StringTemplateService.generateScreenList(table.getTableName(), listNormalFields);
             StringTemplateService.generateScreenAdd(table.getTableName(), listNormalFields);
             StringTemplateService.generateScreenEdit(table.getTableName(), listNormalFields);
+
+            StringTemplateService.generateHTML(Constants.TypeAdd, table.getTableName());
+            StringTemplateService.generateJavascript(Constants.TypeAdd, table.getTableName());
+            StringTemplateService.generateHTML(Constants.TypeEdit, table.getTableName());
+            StringTemplateService.generateJavascript(Constants.TypeEdit, table.getTableName());
+            StringTemplateService.generateHTML(Constants.TypeList, table.getTableName());
+            StringTemplateService.generateJavascript(Constants.TypeList, table.getTableName());
         }
 
         GlobalVariables.tables = tables;
@@ -137,6 +145,8 @@ public class DatabaseConnector
         StringTemplateService.generateViewPort(tables);
         StringTemplateService.generateIndexHTML();
         StringTemplateService.generateMenuController(tables);
+
+        JavaCopyFileFilterByType.copy(Constants.ALL_FILE, Constants.SOURCE_LOCATION, Constants.TARGET_LOCATION);
 
         jsonResult.setStatus("success");
         jsonResult.setData(tables);
@@ -154,15 +164,6 @@ public class DatabaseConnector
     public ArrayList<Table> getTables(Connection connection) throws SQLException
     {
         DatabaseMetaData dataBaseMetaData = connection.getMetaData();
-
-        //productName
-        String productName = dataBaseMetaData.getDatabaseProductName();
-        System.out.println(productName);
-
-        //productVersion
-        String productVersion = dataBaseMetaData.getDatabaseProductVersion();
-        System.out.println(productVersion);
-
         ArrayList<Table> metaTableList = new ArrayList<Table>();
 
         String[] types = {"TABLE"};

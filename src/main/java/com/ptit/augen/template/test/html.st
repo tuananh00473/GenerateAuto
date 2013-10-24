@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="../../Needed Library/js/resources/css/ext-all.css"/>
-    <script type="text/javascript" src="../../Needed Library/js/ext-all-debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="../js/ext-all-debug.js"></script>
     <script type="text/javascript" src="../app/common/Constant.js"></script>
     <script type="text/javascript" src="../app/common/Variables.js"></script>
-    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
-    <script src="../../Needed Library/js/nicEdit.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/nicEdit.js" ></script>
     <script type="text/javascript" src="index$type$$tableName$.js"></script>
+    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 </head>
 <body>
 </body>

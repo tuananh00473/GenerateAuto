@@ -3,233 +3,195 @@ package com.ptit.augen.service;
 
 import com.ptit.augen.model.Field;
 import com.ptit.augen.model.Table;
-import com.ptit.augen.ultility.WriteFileJava;
+import com.ptit.augen.ultility.Constants;
+import com.ptit.augen.ultility.JavaWriteFile;
 import org.antlr.stringtemplate.StringTemplate;
-import org.antlr.stringtemplate.StringTemplateGroup;
-import org.antlr.stringtemplate.language.DefaultTemplateLexer;
 
 import java.util.ArrayList;
 
 public class StringTemplateService
 {
-    public final static String PATH_TEMPLATE_CLIENT = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\template\\client";
-    public final static String PATH_TEMPLATE_SERVER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\template\\server";
-    public final static String PATH_TEMPLATE_TEST = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\template\\test";
-    public final static String PATH_TEMPLATE_OTHER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\java\\com\\ptit\\augen\\template\\other";
-    public static StringTemplateGroup groupClient = new StringTemplateGroup("groupClient", PATH_TEMPLATE_CLIENT, DefaultTemplateLexer.class);
-    public static StringTemplateGroup groupServer = new StringTemplateGroup("groupServer", PATH_TEMPLATE_SERVER, DefaultTemplateLexer.class);
-    public static StringTemplateGroup groupTest = new StringTemplateGroup("groupTest", PATH_TEMPLATE_TEST, DefaultTemplateLexer.class);
-    public static StringTemplateGroup groupOther = new StringTemplateGroup("groupOther", PATH_TEMPLATE_OTHER, DefaultTemplateLexer.class);
 
-    public final static String PATH_OUT_PUT_CLIENT_MODEL = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\model\\";
-    public final static String PATH_OUT_PUT_CLIENT_STORE = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\store\\";
-    public final static String PATH_OUT_PUT_CLIENT_CONTROLLER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\controller\\";
-    public final static String PATH_OUT_PUT_CLIENT_VIEW_SCREEN = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\view\\screen\\";
-    public final static String PATH_OUT_PUT_CLIENT_VIEW_MENU = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\view\\menu\\";
-    public final static String PATH_OUT_PUT_CLIENT_INDEX = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\";
-    public final static String PATH_OUT_PUT_CLIENT_VIEWPORT = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\view\\";
-    public final static String PATH_OUT_PUT_OTHER_COMMON = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\common\\";
-    public final static String PATH_OUT_PUT_OTHER_INDEX = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\app\\";
-
-    public final static String PATH_OUT_PUT_SERVER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\server\\";
-    public final static String PATH_OUT_PUT_SERVER_CONTROLLER = "D:\\Do_An\\17102013\\GenerateAuto\\src\\main\\webapp\\sourcegenerated\\Temp\\Controllers\\";
-
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_MODEL = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\model\\";
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_STORE = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\store\\";
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_CONTROLLER = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\controller\\";
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\view\\screen\\";
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_MENU = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\view\\menu\\";
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_INDEX = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\";
-    public final static String TOMCAT_PATH_OUT_PUT_CLIENT_VIEWPORT = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\view\\";
-    public final static String TOMCAT_PATH_OUT_PUT_OTHER_COMMON = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\common\\";
-    public final static String TOMCAT_PATH_OUT_PUT_OTHER_INDEX = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\";
-
-    public final static String TOMCAT_PATH_OUT_PUT_SERVER = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\server\\";
-    public final static String TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\Controllers\\";
 
     public static void generateModel(String tableName, ArrayList<Field> listFullFields)
     {
-        StringTemplate template = groupClient.getInstanceOf("model");
+        StringTemplate template = Constants.groupClient.getInstanceOf("model");
         template.setAttribute("tableName", tableName);
         template.setAttribute("fields", listFullFields);
 
         String content = template.toString();
         String fileName = tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_MODEL, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_MODEL, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_MODEL, fileName, content);
     }
 
     public static void generateStore(String tableName)
     {
-        StringTemplate template = groupClient.getInstanceOf("store");
+        StringTemplate template = Constants.groupClient.getInstanceOf("store");
         template.setAttribute("tableName", tableName);
 
         String content = template.toString();
         String fileName = tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_STORE, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_STORE, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_STORE, fileName, content);
     }
 
     public static void generateController(String tableName, ArrayList<Field> listFullFields)
     {
-        StringTemplate template = groupClient.getInstanceOf("controller");
+        StringTemplate template = Constants.groupClient.getInstanceOf("controller");
         template.setAttribute("tableName", tableName);
         template.setAttribute("fields", listFullFields);
 
         String content = template.toString();
         String fileName = tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
     }
 
     public static void generateMenuController(ArrayList<Table> tables)
     {
-        StringTemplate template = groupClient.getInstanceOf("menuController");
+        StringTemplate template = Constants.groupClient.getInstanceOf("menuController");
         template.setAttribute("tables", tables);
 
         String content = template.toString();
         String fileName = "Menu.js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_CONTROLLER, fileName, content);
     }
 
     public static void generateScreenList(String tableName, ArrayList<Field> listNormalFields)
     {
-        StringTemplate template = groupClient.getInstanceOf("list");
+        StringTemplate template = Constants.groupClient.getInstanceOf("list");
         template.setAttribute("tableName", tableName);
         template.setAttribute("fields", listNormalFields);
 
         String content = template.toString();
         String fileName = "List" + tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
     }
 
     public static void generateScreenAdd(String tableName, ArrayList<Field> listNormalFields)
     {
-        StringTemplate template = groupClient.getInstanceOf("add");
+        StringTemplate template = Constants.groupClient.getInstanceOf("add");
         template.setAttribute("tableName", tableName);
         template.setAttribute("fields", listNormalFields);
 
         String content = template.toString();
         String fileName = "Add" + tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
     }
 
     public static void generateScreenEdit(String tableName, ArrayList<Field> listNormalFields)
     {
-        StringTemplate template = groupClient.getInstanceOf("edit");
+        StringTemplate template = Constants.groupClient.getInstanceOf("edit");
         template.setAttribute("tableName", tableName);
         template.setAttribute("fields", listNormalFields);
 
         String content = template.toString();
         String fileName = "Edit" + tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_SCREEN, fileName, content);
     }
 
     public static void generateMenu(ArrayList<Table> tables)
     {
-        StringTemplate template = groupClient.getInstanceOf("menu");
+        StringTemplate template = Constants.groupClient.getInstanceOf("menu");
         template.setAttribute("tables", tables);
 
         String content = template.toString();
         String fileName = "TopMenu.js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEW_MENU, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_MENU, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEW_MENU, fileName, content);
     }
 
     public static void generateConstant()
     {
-        StringTemplate template = groupOther.getInstanceOf("constant");
+        StringTemplate template = Constants.groupOther.getInstanceOf("constant");
 
         String content = template.toString();
         String fileName = "Constant.js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_OTHER_COMMON, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_OTHER_COMMON, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_OTHER_COMMON, fileName, content);
     }
 
     public static void generateVariable()
     {
-        StringTemplate template = groupOther.getInstanceOf("variable");
+        StringTemplate template = Constants.groupOther.getInstanceOf("variable");
 
         String content = template.toString();
         String fileName = "Variables.js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_OTHER_COMMON, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_OTHER_COMMON, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_OTHER_COMMON, fileName, content);
     }
 
     public static void generateIndexHTML()
     {
-        StringTemplate template = groupOther.getInstanceOf("index");
+        StringTemplate template = Constants.groupOther.getInstanceOf("index");
 
         String content = template.toString();
         String fileName = "index.jsp";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_OTHER_INDEX, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_OTHER_INDEX, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_OTHER_INDEX, fileName, content);
     }
 
     public static void generateIndexJS(ArrayList<Table> tables)
     {
-        StringTemplate template = groupClient.getInstanceOf("index");
+        StringTemplate template = Constants.groupClient.getInstanceOf("index");
         template.setAttribute("tables", tables);
 
         String content = template.toString();
         String fileName = "index.js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_INDEX, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_INDEX, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_INDEX, fileName, content);
     }
 
     public static void generateViewPort(ArrayList<Table> tables)
     {
-        StringTemplate template = groupClient.getInstanceOf("viewport");
+        StringTemplate template = Constants.groupClient.getInstanceOf("viewport");
         template.setAttribute("tables", tables);
 
         String content = template.toString();
         String fileName = "Viewport.js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
     }
 
-//    public static void generateHTML()
-//    {
-//        StringTemplate template = groupTest.getInstanceOf("html");
-//
-//        String content = template.toString();
-//        String fileName = "html.js";
-//
-////        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-////        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-//    }
-//
-//    public static void generateJavascript()
-//    {
-//        StringTemplate template = groupTest.getInstanceOf("javascript");
-//
-//        String content = template.toString();
-//        String fileName = "Javascrip.js";
-//
-////        WriteFileJava.WritToFile(PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-////        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_CLIENT_VIEWPORT, fileName, content);
-//    }
+    public static void generateHTML(String type, String tableName)
+    {
+        StringTemplate template = Constants.groupTest.getInstanceOf("html");
+        template.setAttribute("type", type);
+        template.setAttribute("tableName", tableName);
+
+        String content = template.toString();
+        String fileName = "index" + type + tableName + ".html";
+
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_TEST, fileName, content);
+    }
+
+    public static void generateJavascript(String type, String tableName)
+    {
+        StringTemplate template = Constants.groupTest.getInstanceOf("javascript");
+
+        boolean IsAdd = (Constants.TypeAdd.equals(type)) ? true : false;
+        boolean IsEdit = (Constants.TypeEdit.equals(type)) ? true : false;
+        boolean IsList = (Constants.TypeList.equals(type)) ? true : false;
+
+        template.setAttribute("IsAdd", IsAdd);
+        template.setAttribute("IsEdit", IsEdit);
+        template.setAttribute("IsList", IsList);
+        template.setAttribute("tableName", tableName);
+
+        String content = template.toString();
+        String fileName = "index" + type + tableName + ".js";
+
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_TEST, fileName, content);
+    }
 
     public static void generateEntity(String packageName, String tableName, ArrayList<Field> listFullFields)
     {
-        StringTemplate template = groupServer.getInstanceOf("entity");
+        StringTemplate template = Constants.groupServer.getInstanceOf("entity");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tableName", tableName);
         template.setAttribute("fields", listFullFields);
@@ -237,26 +199,24 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + ".java";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generateDAO(String packageName, String tableName)
     {
-        StringTemplate template = groupServer.getInstanceOf("DAOInterface");
+        StringTemplate template = Constants.groupServer.getInstanceOf("DAOInterface");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tableName", tableName);
 
         String content = template.toString();
         String fileName = tableName + "DAO.java";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generateServiceInterface(String packageName, String tableName, String typeKey)
     {
-        StringTemplate template = groupServer.getInstanceOf("ServiceInterface");
+        StringTemplate template = Constants.groupServer.getInstanceOf("ServiceInterface");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tableName", tableName);
         template.setAttribute("typeKey", typeKey);
@@ -264,13 +224,12 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + "Service.java";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generateServiceImplements(String packageName, String tableName, String typeKey)
     {
-        StringTemplate template = groupServer.getInstanceOf("ServiceImpl");
+        StringTemplate template = Constants.groupServer.getInstanceOf("ServiceImpl");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tableName", tableName);
         template.setAttribute("typeKey", typeKey);
@@ -278,38 +237,35 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + "ServiceImpl.java";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generatePersistence(String packageName, ArrayList<Table> tables)
     {
-        StringTemplate template = groupServer.getInstanceOf("Persistence");
+        StringTemplate template = Constants.groupServer.getInstanceOf("Persistence");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tables", tables);
 
         String content = template.toString();
         String fileName = "persistence.xml";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generatePom(String projectName)
     {
-        StringTemplate template = groupServer.getInstanceOf("Pom");
+        StringTemplate template = Constants.groupServer.getInstanceOf("Pom");
         template.setAttribute("projectName", projectName);
 
         String content = template.toString();
         String fileName = "pom.xml";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generateSpringConfig(String packageName, String driver, String url, String username, String password)
     {
-        StringTemplate template = groupServer.getInstanceOf("SpringConfig");
+        StringTemplate template = Constants.groupServer.getInstanceOf("SpringConfig");
         template.setAttribute("packageName", packageName);
         template.setAttribute("driver", driver);
         template.setAttribute("url", url);
@@ -319,21 +275,19 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = "mvc-dispatcher-servlet.xml";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER, fileName, content);
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
     }
 
     public static void generateServerController(String tableName, ArrayList<Field> listFullFields)
     {
         // viet Controller theo SpringMVC
-//        StringTemplate template = groupServer.getInstanceOf("controller");
+//        StringTemplate template = Constants.groupServer.getInstanceOf("controller");
 //        template.setAttribute("tableName", tableName);
 //        template.setAttribute("fields", listFullFields);
 //
 //        String content = template.toString();
         String fileName = tableName + ".js";
 
-        WriteFileJava.WritToFile(PATH_OUT_PUT_SERVER_CONTROLLER, fileName, "");
-        WriteFileJava.WritToFile(TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER, fileName, "");
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER, fileName, "");
     }
 }
