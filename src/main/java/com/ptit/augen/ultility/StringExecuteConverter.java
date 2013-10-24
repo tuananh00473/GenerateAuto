@@ -1,5 +1,7 @@
 package com.ptit.augen.ultility;
 
+import java.util.regex.Matcher;
+
 /**
  * User: Anhnt
  * Date: 9/20/13
@@ -17,13 +19,13 @@ public class StringExecuteConverter
 
     public static String convertFromPackageToDirection(String packageString)
     {
-        String stringConverted = packageString.replaceAll("\\.", "/");
+        String stringConverted = packageString.replaceAll(Matcher.quoteReplacement("."), Matcher.quoteReplacement("\\"));
         return stringConverted;
     }
 
     public static String convertFromDirectionToPackage(String directionString)
     {
-        String stringConverted = directionString.replaceAll("/", "\\.");
+        String stringConverted = directionString.replaceAll(Matcher.quoteReplacement("\\"), Matcher.quoteReplacement("."));
         return stringConverted;
     }
 

@@ -13,9 +13,20 @@ Ext.define('AM.view.InformationOutputPanel', {
         {
             xtype: 'form',
             id: 'myForm',
-            url: '/Connection/ConnectPostgres',
+            url: '/Connection/GenerateCode',
             layout: 'vbox',
             items: [
+                {
+                    xtype: 'textfield',
+                    itemId: 'ProjectLocationId',
+                    name: 'ProjectLocationId',
+                    value: 'D:/Do_An/24_10_2013',
+                    labelWidth: 150,
+                    width: 500,
+                    allowBlank: false,
+                    msgTarget: 'none',
+                    fieldLabel: 'Project Location'
+                },
                 {
                     xtype: 'textfield',
                     itemId: 'ProjectNameId',
@@ -37,17 +48,6 @@ Ext.define('AM.view.InformationOutputPanel', {
                     allowBlank: false,
                     msgTarget: 'none',
                     fieldLabel: 'Base Package'
-                },
-                {
-                    xtype: 'textfield',
-                    itemId: 'ProjectLocationId',
-                    name: 'ProjectLocationId',
-                    value: 'D:/Do_An/24_10_2013',
-                    labelWidth: 150,
-                    width: 500,
-                    allowBlank: false,
-                    msgTarget: 'none',
-                    fieldLabel: 'Project Location'
                 }
             ]
         }

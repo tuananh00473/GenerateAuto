@@ -14,6 +14,7 @@ public class GlobalVariables
 {
     public static String CurrentDataModel = "";
     public static String CurrentDatabaseType = "";
+    public static String driver = "";
     public static String ProviderString = "";
     public static String Password = "";
     public static String UserID = "";
@@ -25,7 +26,17 @@ public class GlobalVariables
     public static Connection connection = null;
     public static ArrayList<Table> tables = null;
 
-    public static String packageName = "";
+    public static String projectLocation = "";
     public static String projectName = "";
-    public static String driver = "";
+    public static String packageName = "";
+
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_ENTITY = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_DAO = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_POM = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG = "";
+
+    public static String PROJECT_OUTPUT = "";
 }

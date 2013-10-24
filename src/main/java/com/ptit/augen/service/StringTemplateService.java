@@ -189,7 +189,7 @@ public class StringTemplateService
         JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_TEST, fileName, content);
     }
 
-    public static void generateEntity(String packageName, String tableName, ArrayList<Field> listFullFields)
+    public static void generateEntity(String path, String packageName, String tableName, ArrayList<Field> listFullFields)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("entity");
         template.setAttribute("packageName", packageName);
@@ -199,10 +199,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + ".java";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateDAO(String packageName, String tableName)
+    public static void generateDAO(String path, String packageName, String tableName)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("DAOInterface");
         template.setAttribute("packageName", packageName);
@@ -211,10 +211,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + "DAO.java";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateServiceInterface(String packageName, String tableName, String typeKey)
+    public static void generateServiceInterface(String path, String packageName, String tableName, String typeKey)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("ServiceInterface");
         template.setAttribute("packageName", packageName);
@@ -224,10 +224,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + "Service.java";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateServiceImplements(String packageName, String tableName, String typeKey)
+    public static void generateServiceImplements(String path, String packageName, String tableName, String typeKey)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("ServiceImpl");
         template.setAttribute("packageName", packageName);
@@ -237,10 +237,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = tableName + "ServiceImpl.java";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generatePersistence(String packageName, ArrayList<Table> tables)
+    public static void generatePersistence(String path, String packageName, ArrayList<Table> tables)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("Persistence");
         template.setAttribute("packageName", packageName);
@@ -249,10 +249,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = "persistence.xml";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generatePom(String projectName)
+    public static void generatePom(String path, String projectName)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("Pom");
         template.setAttribute("projectName", projectName);
@@ -260,10 +260,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = "pom.xml";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateSpringConfig(String packageName, String driver, String url, String username, String password)
+    public static void generateSpringConfig(String path, String packageName, String driver, String url, String username, String password)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("SpringConfig");
         template.setAttribute("packageName", packageName);
@@ -275,10 +275,10 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = "mvc-dispatcher-servlet.xml";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER, fileName, content);
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateServerController(String tableName, ArrayList<Field> listFullFields)
+    public static void generateServerController(String path, String tableName, ArrayList<Field> listFullFields)
     {
         // viet Controller theo SpringMVC
 //        StringTemplate template = Constants.groupServer.getInstanceOf("controller");
@@ -288,6 +288,6 @@ public class StringTemplateService
 //        String content = template.toString();
         String fileName = tableName + ".js";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER, fileName, "");
+        JavaWriteFile.WritToFile(path, fileName, "");
     }
 }

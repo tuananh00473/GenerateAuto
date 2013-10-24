@@ -2,9 +2,7 @@ package com.ptit.augen.service;
 
 import com.ptit.augen.model.Field;
 import com.ptit.augen.model.Table;
-import com.ptit.augen.ultility.Constants;
-import com.ptit.augen.ultility.GlobalVariables;
-import com.ptit.augen.ultility.JavaWriteFile;
+import com.ptit.augen.ultility.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,14 +46,29 @@ public class MainController
         return "hello";
     }
 
-    @RequestMapping(value = "/Connection/GenerateCode", method = RequestMethod.GET)
-    public String generateCode(ModelMap model)
+    @RequestMapping(value = "/Connection/GenerateCode", params = {"ProjectLocationId", "ProjectNameId", "BasePackageId"}, method = RequestMethod.GET)
+    public String generateCode(@RequestParam String ProjectLocationId, @RequestParam String ProjectNameId, @RequestParam String BasePackageId)
     {
+        GlobalVariables.projectLocation = ProjectLocationId;
+        GlobalVariables.projectName = ProjectNameId;
+        GlobalVariables.packageName = BasePackageId;
+
+        String packageDirection = StringExecuteConverter.convertFromPackageToDirection(BasePackageId);
+
+        GlobalVariables.PROJECT_OUTPUT = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection;
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_ENTITY = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\entity\\";
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_DAO = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\dao\\";
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\business\\";
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\controller\\";
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\controller\\";
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_POM = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\controller\\";
+        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG = ProjectLocationId + "\\" + ProjectNameId + "\\" + packageDirection + "\\controller\\";
+
         ArrayList<Table> tables = GlobalVariables.tables;
         for (Table table : tables)
         {
-            StringTemplateService.generateEntity(GlobalVariables.packageName, table.getTableName(), table.getFields());
-            StringTemplateService.generateDAO(GlobalVariables.packageName, table.getTableName());
+            StringTemplateService.generateEntity(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_ENTITY, GlobalVariables.packageName, table.getTableName(), table.getFields());
+            StringTemplateService.generateDAO(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_DAO, GlobalVariables.packageName, table.getTableName());
 
             String typeKey = "";
             for (Field field : table.getFields())
@@ -66,12 +79,14 @@ public class MainController
                 }
             }
 
-            StringTemplateService.generateServiceInterface(GlobalVariables.packageName, table.getTableName(), typeKey);
-            StringTemplateService.generateServiceImplements(GlobalVariables.packageName, table.getTableName(), typeKey);
+            StringTemplateService.generateServiceInterface(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS, GlobalVariables.packageName, table.getTableName(), typeKey);
+            StringTemplateService.generateServiceImplements(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS, GlobalVariables.packageName, table.getTableName(), typeKey);
         }
-        StringTemplateService.generatePersistence(GlobalVariables.packageName, tables);
-        StringTemplateService.generatePom(GlobalVariables.projectName);
-        StringTemplateService.generateSpringConfig(GlobalVariables.projectName, GlobalVariables.driver, GlobalVariables.ConnString, GlobalVariables.UserID, GlobalVariables.Password);
+        StringTemplateService.generatePersistence(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE, GlobalVariables.packageName, tables);
+        StringTemplateService.generatePom(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_POM, GlobalVariables.projectName);
+        StringTemplateService.generateSpringConfig(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG, GlobalVariables.projectName, GlobalVariables.driver, GlobalVariables.ConnString, GlobalVariables.UserID, GlobalVariables.Password);
+
+        JavaCopyFileFilterByType.copy(Constants.ALL_FILE, Constants.TARGET_LOCATION, GlobalVariables.PROJECT_OUTPUT);
         return "hello";
     }
 }

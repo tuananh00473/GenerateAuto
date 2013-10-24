@@ -36,9 +36,6 @@ public class Constants
 
     public static final String TOMCAT_PATH_OUT_PUT_TEST = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\test\\";
 
-    public static final String TOMCAT_PATH_OUT_PUT_SERVER = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\server\\";
-    public static final String TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\Controllers\\";
-
     public static final String SOURCE_LOCATION = "D:\\Library\\do_an_libraries";
     public static final String TARGET_LOCATION = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp";
 

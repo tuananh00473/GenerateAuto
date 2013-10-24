@@ -154,7 +154,7 @@ Ext.define("AM.Application", {
         AM.config.AppConfig.CODE_MIRROR_LIST.on("change", function ()
         {
             clearTimeout(delay);
-            delay = setTimeout(updatePreviewList, 3000);
+            delay = setTimeout(updatePreviewList, 1000);
         });
         Ext.getCmp('centerId').setActiveTab('tabAddId');
         AM.config.AppConfig.APP_LOAD_STATUS = true;
@@ -163,9 +163,6 @@ Ext.define("AM.Application", {
 
         function updatePreviewAdd()
         {
-            alert(AM.config.AppConfig.CODE_MIRROR_ADD.getValue());
-            console.log(AM.config.AppConfig.COOKIES.get('TableName'));
-            console.log(AM.config.AppConfig.CODE_MIRROR_ADD.getValue());
             AM.config.AppConfig.MASK.show();
             Ext.Ajax.request({
                 url: '/Connection/UpdateFile',
