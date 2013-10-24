@@ -9,31 +9,41 @@ Ext.define("AM.controller.SettingGridController", {
             click: 'onbtnSaveSettingClick'
         }
     },
-    init: function () {
+    init: function ()
+    {
         return this.callParent(arguments);
     },
-    onBeforeEdit: function (editor, e) {
+    onBeforeEdit: function (editor, e)
+    {
         if (e.record.get('IsKey') == true)
+        {
             return false;
+        }
     },
-    loadInitialData: function () {
+    loadInitialData: function ()
+    {
         var _this = this;
         this.getView().setLoading(true);
         return this.getScenarioService().loadInitialData().then({
-            success: function () {
+            success: function ()
+            {
                 return _this.getScenarioContext().initialDataLoaded();
             },
-            failure: function (errorMessage) {
+            failure: function (errorMessage)
+            {
                 return _this.getNotificationService().error("Error", errorMessage);
             }
-        }).always(function () {
-            return _this.getView().setLoading(false);
-        });
+        }).always(function ()
+            {
+                return _this.getView().setLoading(false);
+            });
     },
-    onbtnSaveSettingClick: function () {
+    onbtnSaveSettingClick: function ()
+    {
         var _this = this;
         var settings = new Array();
-        Ext.Array.forEach(_this.getView().getStore().getUpdatedRecords(), function (item, index) {
+        Ext.Array.forEach(_this.getView().getStore().getUpdatedRecords(), function (item, index)
+        {
             var setting = {
                 FieldName: '',
                 LabelName: '',
@@ -55,6 +65,7 @@ Ext.define("AM.controller.SettingGridController", {
             settings.push(setting);
         });
         if (settings.length != 0)
+        {
             Ext.Ajax.request({
                 url: '/Connection/UpdateSetting',
                 dataType: 'json',
@@ -63,18 +74,22 @@ Ext.define("AM.controller.SettingGridController", {
                 params: {
                     tableName: AM.config.AppConfig.COOKIES.get('TableName')
                 },
-                success: function (response, opts) {
+                success: function (response, opts)
+                {
                     _this.getView().getStore().load({
                         scope: this,
-                        callback: function (records, operation, success) {
+                        callback: function (records, operation, success)
+                        {
                             AM.config.AppConfig.MASK.show();
                             Ext.Ajax.request({
-                                url: 'source generated/Temp/app/view/screen/' + AM.config.AppConfig.COOKIES.get('ViewType') + AM.config.AppConfig.COOKIES.get('TableName') + '.js',
-                                success: function (response, opts) {
+                                url: 'sourcegenerated/Temp/app/view/screen/' + AM.config.AppConfig.COOKIES.get('ViewType') + AM.config.AppConfig.COOKIES.get('TableName') + '.js',
+                                success: function (response, opts)
+                                {
                                     AM.config.AppConfig.MASK.hide();
                                     AM.config.AppConfig.CURRENT_EDITOR.setValue(response.responseText);
                                 },
-                                failure: function (response, opts) {
+                                failure: function (response, opts)
+                                {
                                     AM.config.AppConfig.MASK.hide();
                                 }
                             });
@@ -82,9 +97,11 @@ Ext.define("AM.controller.SettingGridController", {
                     });
                     _this.getNotificationService().success("Success", "Update setting successfull !");
                 },
-                failure: function (response, opts) {
+                failure: function (response, opts)
+                {
                     _this.getNotificationService().error("Error", "System error ! Please try again !");
                 }
             });
+        }
     }
 });

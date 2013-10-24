@@ -41,7 +41,8 @@ public class DatabaseConnector
         JSONObject connectionStatus = new JSONObject();
         try
         {
-            Class.forName("org.postgresql.Driver");
+            String driver = "org.postgresql.Driver";
+            Class.forName(driver);
             String url = PostgresProviderNameId + "://" + PostgresNameId + "/" + PostgresInitialCatalogId;
             Connection connection = DriverManager.getConnection(url, PostgresUserNameId, PostgresPasswordId);
             if (connection != null)
@@ -52,6 +53,7 @@ public class DatabaseConnector
                 GlobalVariables.Password = PostgresPasswordId;
                 GlobalVariables.ProviderString = PostgresProviderNameId;
                 GlobalVariables.ServerName = PostgresNameId;
+                GlobalVariables.driver = driver;
                 GlobalVariables.ConnString = url;
                 GlobalVariables.InitialCatalog = PostgresInitialCatalogId;
                 GlobalVariables.connection = connection;
@@ -116,18 +118,18 @@ public class DatabaseConnector
                 }
                 listFullFields.add(field);
             }
-            String tableNameUppercase = upperCaseFirst(table.getTableName());
+            table.setFields(listFullFields);
+
             StringTemplateService.generateModel(table.getTableName(), listFullFields);
             StringTemplateService.generateStore(table.getTableName());
             StringTemplateService.generateController(table.getTableName(), listFullFields);
             StringTemplateService.generateScreenList(table.getTableName(), listNormalFields);
             StringTemplateService.generateScreenAdd(table.getTableName(), listNormalFields);
             StringTemplateService.generateScreenEdit(table.getTableName(), listNormalFields);
-
-            StringTemplateService.generateServerModel(tableNameUppercase, listFullFields);
-            StringTemplateService.generateServerDAO(tableNameUppercase, listNormalFields);
-            StringTemplateService.generateServerController(tableNameUppercase, listFullFields);
         }
+
+        GlobalVariables.tables = tables;
+
         StringTemplateService.generateMenu(tables);
         StringTemplateService.generateConstant();
         StringTemplateService.generateVariable();

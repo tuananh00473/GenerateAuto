@@ -1,9 +1,9 @@
 package com.ptit.augen.ultility;
 
-import com.ptit.augen.model.Field;
+import com.ptit.augen.model.Table;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * User: AnhNT
@@ -23,7 +23,9 @@ public class GlobalVariables
     public static int Status = Constants.ConnectionEmpty;
     public static String FolderName = "";
     public static Connection connection = null;
-    public static List<Field> listNormalFields = null;
-    public static List<Field> listFullFields = null;
+    public static ArrayList<Table> tables = null;
 
+    public static String packageName = "";
+    public static String projectName = "";
+    public static String driver = "";
 }

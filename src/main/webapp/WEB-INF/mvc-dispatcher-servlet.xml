@@ -11,6 +11,7 @@
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/ExtJsApp/**" location="/ExtJsApp/"/>
+    <mvc:resources mapping="/sourcegenerated/**" location="/sourcegenerated/"/>
     <context:annotation-config/>
     <context:component-scan base-package="com.ptit.augen"/>
 

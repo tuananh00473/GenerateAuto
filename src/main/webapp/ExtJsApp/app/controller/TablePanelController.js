@@ -11,10 +11,12 @@ Ext.define("AM.controller.TablePanelController", {
     config: {
         settingStore: null
     },
-    init: function () {
+    init: function ()
+    {
         return this.callParent(arguments);
     },
-    onPanelExpand: function (p, eOpts) {
+    onPanelExpand: function (p, eOpts)
+    {
         var tableName = p.title;
         AM.config.AppConfig.COOKIES.set('TableName', tableName);
         this.getSettingStore().setProxy({
@@ -29,16 +31,19 @@ Ext.define("AM.controller.TablePanelController", {
         });
         this.getSettingStore().load({
             scope: this,
-            callback: function (records, operation, success) {                
+            callback: function (records, operation, success)
+            {
                 AM.config.AppConfig.MASK.show();
                 Ext.Ajax.request({
-                    url: 'source generated/Temp/app/view/screen/Add' + tableName + '.js',
-                    success: function (response, opts) {
+                    url: 'sourcegenerated/Temp/app/view/screen/Add' + tableName + '.js',
+                    success: function (response, opts)
+                    {
                         Ext.getCmp('centerId').setActiveTab('tabAddId');
                         AM.config.AppConfig.MASK.hide();
                         AM.config.AppConfig.CODE_MIRROR_ADD.setValue(response.responseText);
                     },
-                    failure: function (response, opts) {
+                    failure: function (response, opts)
+                    {
                         AM.config.AppConfig.MASK.hide();
                     }
                 });

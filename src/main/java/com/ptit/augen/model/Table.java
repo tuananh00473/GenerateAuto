@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class Table
 {
-    private String TableName;
-    private ArrayList<Field> Fields;
+    public String TableName;
+    public ArrayList<Field> Fields;
 
     @JsonProperty("TableName")
     public String getTableName()
@@ -35,5 +35,4 @@ public class Table
     {
         Fields = fields;
     }
-
 }

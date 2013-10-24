@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class JsonResult
 {
-    private String status;
-    private ArrayList data;
+    public String status;
+    public ArrayList data;
 
     public String getStatus()
     {

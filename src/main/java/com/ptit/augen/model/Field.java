@@ -9,29 +9,29 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class Field
 {
-    private String FieldName;
-    private String FieldType;   // Type in ExtJs
-    private String ServerFieldType;  // Type in Java
-    private Boolean IsKey;   // Primary Key
-    private Boolean IsInt;
-    private Boolean IsLong;
-    private Boolean IsBoolean;
-    private Boolean IsFloat;
-    private Boolean IsString;
+    public String FieldName;
+    public String FieldType;   // Type in ExtJs
+    public String ServerFieldType;  // Type in Java
+    public Boolean IsKey;   // Primary Key
+    public Boolean IsInt;
+    public Boolean IsLong;
+    public Boolean IsBoolean;
+    public Boolean IsFloat;
+    public Boolean IsString;
 
-    private String LabelName;  // default set =  FieldName
-    private String FieldWidth; // 500
-    private String FieldHeight;      //28
-    private String ItemType;
-    private int ItemTypeId;
-    private String AllowBlank;
-    private Boolean AllowBlankBoolean;
-    private int AllowBlankBooleanId;
-    private Boolean IsHTMLEditor;
-    private Boolean HasSearch;
-    private int HasSearchId;
-    private String SearchType;
-    private int SearchTypeId;
+    public String LabelName;  // default set =  FieldName
+    public String FieldWidth; // 500
+    public String FieldHeight;      //28
+    public String ItemType;
+    public int ItemTypeId;
+    public String AllowBlank;
+    public Boolean AllowBlankBoolean;
+    public int AllowBlankBooleanId;
+    public Boolean IsHTMLEditor;
+    public Boolean HasSearch;
+    public int HasSearchId;
+    public String SearchType;
+    public int SearchTypeId;
 
     @JsonProperty("FieldName")
     public String getFieldName()
