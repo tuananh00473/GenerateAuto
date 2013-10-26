@@ -288,4 +288,15 @@ public class StringTemplateService
 
         JavaWriteFile.WritToFile(path, fileName, "");
     }
+
+    public static void generateJsonResultEntity(String path, String packageName)
+    {
+        StringTemplate template = Constants.groupClient.getInstanceOf("jsonResult");
+        template.setAttribute("packageName", packageName);
+
+        String content = template.toString();
+        String fileName = "JsonResult.java";
+
+        JavaWriteFile.WritToFile(path, fileName, content);
+    }
 }

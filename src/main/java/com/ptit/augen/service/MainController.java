@@ -73,6 +73,7 @@ public class MainController
             StringTemplateService.generateServiceImplements(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS_IMPL, GlobalVariables.packageName, table.getTableName());
             JavaCopyFileFilterByType.copySingleFileWithOtherName(Constants.GENERATE_MENU_BUTTON, GlobalVariables.GENERATE_BITMAPS, table.getTableName() + ".png");
         }
+        StringTemplateService.generateJsonResultEntity(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_ENTITY, GlobalVariables.packageName);
         StringTemplateService.generatePersistence(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE, GlobalVariables.packageName, tables);
         StringTemplateService.generatePom(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_POM, GlobalVariables.projectName);
         StringTemplateService.generateSpringConfig(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG, GlobalVariables.packageName, GlobalVariables.driver, GlobalVariables.ConnString, GlobalVariables.UserID, GlobalVariables.Password);
