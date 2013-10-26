@@ -183,73 +183,11 @@ public class DatabaseConnector
             }
 
             ResultSet resultSetColumn = dataBaseMetaData.getColumns(null, null, tableName, "%");
-            ArrayList<Field> fields = new ArrayList<Field>();
-            while (resultSetColumn.next())
-            {
-                Field field = new Field();
-
-                String columnName = resultSetColumn.getString(4);
-                String columnType = resultSetColumn.getString(6);
-
-                field.setFieldName(columnName);  // 1. none 2. .. 3. .. 4. column name 5. .. 6. type data
-                field.setFieldType(StringExecuteConverter.convertTypeOfDataToExtentionJSType(columnType));
-                field.setServerFieldType(StringExecuteConverter.convertTypeOfDataToJavaType(columnType));
-                field.setIsKey(checkPrimaryKey(columnName, fieldPrimaryKeyName));
-
-                field.setIsInt(false);
-                field.setIsLong(false);
-                field.setIsBoolean(false);
-                field.setIsFloat(false);
-                field.setIsString(false);
-
-                if (field.getFieldType().equals("int"))
-                {
-                    field.setIsInt(true);
-                }
-                else if (field.getFieldType().equals("auto"))
-                {
-                    field.setIsLong(true);
-                }
-                else if (field.getFieldType().equals("boolean"))
-                {
-                    field.setIsBoolean(true);
-                }
-                else if (field.getFieldType().equals("double"))
-                {
-                    field.setIsFloat(true);
-                }
-                else if (field.getFieldType().equals("string"))
-                {
-                    field.setIsString(true);
-                }
-
-                if (!field.getFieldName().isEmpty() && !field.getIsKey())
-                {
-                    field.setLabelName(field.getFieldName());
-                    field.setFieldWidth("500");
-                    field.setFieldHeight("28");
-                    field.setItemType(Constants.DATA_FIELD_TYPE.get(0));
-                    field.setAllowBlank("false");
-                    field.setAllowBlankBoolean(false);
-                    field.setIsHTMLEditor(false);
-                    field.setHasSearch(false);
-                    field.setSearchType("");
-                }
-                fields.add(field);
-            }
+            ArrayList<Field> fields = getListField(fieldPrimaryKeyName, resultSetColumn);
             table.setFields(fields);
             metaTableList.add(table);
         }
         return metaTableList;
-    }
-
-    private boolean checkPrimaryKey(String columnName, String fieldPrimaryKeyName)
-    {
-        if (fieldPrimaryKeyName.equals(columnName))
-        {
-            return true;
-        }
-        return false;
     }
 
     @RequestMapping(value = "/Connection/GetListFieldByTable", params = {"TableName"}, method = RequestMethod.GET)
@@ -268,62 +206,86 @@ public class DatabaseConnector
         }
 
         ResultSet resultSetColumn = dataBaseMetaData.getColumns(null, null, TableName, "%");
-        ArrayList<Field> fields = new ArrayList<Field>();
-        while (resultSetColumn.next())
-        {
-            Field field = new Field();
-
-            String columnName = resultSetColumn.getString(4);
-            String columnType = resultSetColumn.getString(6);
-
-            field.setFieldName(columnName);  // 1. none 2. .. 3. .. 4. column name 5. .. 6. type data
-            field.setFieldType(StringExecuteConverter.convertTypeOfDataToExtentionJSType(columnType));
-            field.setServerFieldType(StringExecuteConverter.convertTypeOfDataToJavaType(columnType));
-            field.setIsKey(checkPrimaryKey(columnName, fieldPrimaryKeyName));
-
-            field.setIsInt(false);
-            field.setIsLong(false);
-            field.setIsBoolean(false);
-            field.setIsFloat(false);
-            field.setIsString(false);
-
-            if (field.getFieldType().equals("int"))
-            {
-                field.setIsInt(true);
-            }
-            else if (field.getFieldType().equals("auto"))
-            {
-                field.setIsLong(true);
-            }
-            else if (field.getFieldType().equals("boolean"))
-            {
-                field.setIsBoolean(true);
-            }
-            else if (field.getFieldType().equals("double"))
-            {
-                field.setIsFloat(true);
-            }
-            else if (field.getFieldType().equals("string"))
-            {
-                field.setIsString(true);
-            }
-
-            if (!field.getFieldName().isEmpty() && !field.getIsKey())
-            {
-                field.setLabelName(field.getFieldName());
-                field.setFieldWidth("500");
-                field.setFieldHeight("28");
-                field.setItemType(Constants.DATA_FIELD_TYPE.get(0));
-                field.setAllowBlank("false");
-                field.setAllowBlankBoolean(false);
-                field.setIsHTMLEditor(false);
-                field.setHasSearch(false);
-                field.setSearchType("");
-            }
-            fields.add(field);
-        }
+        ArrayList<Field> fields = getListField(fieldPrimaryKeyName, resultSetColumn);
         jsonResult.setStatus("success");
         jsonResult.setData(fields);
         return jsonResult;
+    }
+
+    private boolean checkPrimaryKey(String columnName, String fieldPrimaryKeyName)
+    {
+        if (fieldPrimaryKeyName.equals(columnName))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private ArrayList<Field> getListField(String fieldPrimaryKeyName, ResultSet resultSetColumn) throws SQLException
+    {
+        ArrayList<Field> fields = new ArrayList<Field>();
+        while (resultSetColumn.next())
+        {
+            String columnName = resultSetColumn.getString(4);
+            String columnType = resultSetColumn.getString(6);
+
+            Field field = getField(fieldPrimaryKeyName, columnName, columnType);
+            fields.add(field);
+        }
+        return fields;
+    }
+
+    private Field getField(String fieldPrimaryKeyName, String columnName, String columnType)
+    {
+        Field field = new Field();
+        field.setFieldName(columnName);  // 1. none 2. .. 3. .. 4. column name 5. .. 6. type data
+        field.setFieldType(StringExecuteConverter.convertTypeOfDataToExtentionJSType(columnType));
+        field.setServerFieldType(StringExecuteConverter.convertTypeOfDataToJavaType(columnType));
+        field.setIsKey(checkPrimaryKey(columnName, fieldPrimaryKeyName));
+
+        field.setIsInt(false);
+        field.setIsLong(false);
+        field.setIsBoolean(false);
+        field.setIsFloat(false);
+        field.setIsString(false);
+
+        if (field.getFieldType().equals("int"))
+        {
+            field.setIsInt(true);
+        }
+        else if (field.getFieldType().equals("auto"))
+        {
+            field.setIsLong(true);
+        }
+        else if (field.getFieldType().equals("boolean"))
+        {
+            field.setIsBoolean(true);
+        }
+        else if (field.getFieldType().equals("double"))
+        {
+            field.setIsFloat(true);
+        }
+        else if (field.getFieldType().equals("string"))
+        {
+            field.setIsString(true);
+        }
+
+        if (!field.getFieldName().isEmpty() && !field.getIsKey())
+        {
+            field.setLabelName(field.getFieldName());
+            field.setFieldWidth("500");
+            field.setFieldHeight("28");
+            field.setItemType(Constants.DATA_FIELD_TYPE.get(0));
+            field.setItemTypeId(1);
+            field.setAllowBlank("false");
+            field.setAllowBlankBooleanId(2);
+            field.setAllowBlankBoolean(false);
+            field.setIsHTMLEditor(false);
+            field.setHasSearch(false);
+            field.setHasSearchId(2);
+            field.setSearchType("");
+            field.setSearchTypeId(1);
+        }
+        return field;
     }
 }

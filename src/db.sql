@@ -17,21 +17,23 @@ ALTER TABLE Account
 OWNER TO admin;
 
 
--- Table: Guest
+-- Table: student
 
--- DROP TABLE Guest;
+-- DROP TABLE student;
 
-CREATE TABLE Guest
+CREATE TABLE student
 (
   id           BIGINT NOT NULL,
-  name         TEXT,
-  signing_date DATE,
-  CONSTRAINT Guest_pkey PRIMARY KEY (id)
+  student_name CHARACTER VARYING(255),
+  student_age  INT,
+  gender       CHARACTER VARYING(255),
+  email        TEXT,
+  CONSTRAINT student_pkey PRIMARY KEY (id)
 )
 WITH (
 OIDS = FALSE
 );
-ALTER TABLE Guest
+ALTER TABLE student
 OWNER TO admin;
 
 

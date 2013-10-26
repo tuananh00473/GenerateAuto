@@ -18,7 +18,7 @@ Ext.define('AM.view.InformationOutputPanel', {
             items: [
                 {
                     xtype: 'textfield',
-                    itemId: 'ProjectLocationId',
+                    id: 'ProjectLocationId',
                     name: 'ProjectLocationId',
                     value: 'D:/Do_An/24_10_2013',
                     labelWidth: 150,
@@ -29,7 +29,7 @@ Ext.define('AM.view.InformationOutputPanel', {
                 },
                 {
                     xtype: 'textfield',
-                    itemId: 'ProjectNameId',
+                    id: 'ProjectNameId',
                     name: 'ProjectNameId',
                     value: 'AppGenerated',
                     labelWidth: 150,
@@ -40,7 +40,7 @@ Ext.define('AM.view.InformationOutputPanel', {
                 },
                 {
                     xtype: 'textfield',
-                    itemId: 'BasePackageId',
+                    id: 'BasePackageId',
                     name: 'BasePackageId',
                     value: 'com.springapp.mvc',
                     labelWidth: 150,

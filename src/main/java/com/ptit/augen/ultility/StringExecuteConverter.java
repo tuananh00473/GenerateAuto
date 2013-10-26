@@ -19,7 +19,7 @@ public class StringExecuteConverter
 
     public static String convertFromPackageToDirection(String packageString)
     {
-        String stringConverted = packageString.replaceAll(Matcher.quoteReplacement("."), Matcher.quoteReplacement("\\"));
+        String stringConverted = packageString.replaceAll("\\.", Matcher.quoteReplacement("\\"));
         return stringConverted;
     }
 

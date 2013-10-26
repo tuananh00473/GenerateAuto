@@ -24,7 +24,7 @@ Ext.define('AM.view.screen.List$tableName$', {
                 xtype: 'actioncolumn',
                 align: 'center',
                 items: [{
-                    icon: 'bitmaps/tool_edit.png',
+                    icon: 'app/bitmaps/tool_edit.png',
                     tooltip: 'Sửa thông tin'
                 }],
                 handler: function (grid, row, col) {
@@ -36,7 +36,7 @@ Ext.define('AM.view.screen.List$tableName$', {
                 xtype: 'actioncolumn',
                 align: 'center',
                 items: [{
-                    icon: 'bitmaps/tool_delete.png',
+                    icon: 'app/bitmaps/tool_delete.png',
                     tooltip: 'Xóa bản ghi'
                 }],
                 handler: function (grid, row, col) {
@@ -66,7 +66,7 @@ Ext.define('AM.view.screen.List$tableName$', {
                     text: 'Thêm',
                     cls: 'button-right',
                     scale: 'medium',
-                    icon: 'bitmaps/tool_add.png',
+                    icon: 'app/bitmaps/tool_add.png',
                     handler: function () {
                         Ext.ComponentQuery.query('screenList$tableName$')[0].fireEvent('btnAddClick');
                     }
@@ -76,7 +76,7 @@ Ext.define('AM.view.screen.List$tableName$', {
                     text: 'In',
                     cls: 'button-right',
                     scale: 'medium',
-                    icon: 'bitmaps/tool_print.png',
+                    icon: 'app/bitmaps/tool_print.png',
                     handler: function () {
                         Ext.ComponentQuery.query('screenList$tableName$')[0].fireEvent('btnPrintClick');
                     }
@@ -102,7 +102,7 @@ Ext.define('AM.view.screen.List$tableName$', {
                     text: 'Tìm Kiếm',
                     cls: 'button-right',
                     scale: 'medium',
-                    icon: 'bitmaps/search.png',
+                    icon: 'app/bitmaps/search.png',
                     handler: function () {
                         Ext.ComponentQuery.query('screenList$tableName$')[0].fireEvent('btnFilterClick');
                     }

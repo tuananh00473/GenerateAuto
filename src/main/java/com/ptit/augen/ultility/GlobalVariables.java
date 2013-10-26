@@ -33,10 +33,18 @@ public class GlobalVariables
     public static String TOMCAT_PATH_OUT_PUT_SERVER_ENTITY = "";
     public static String TOMCAT_PATH_OUT_PUT_SERVER_DAO = "";
     public static String TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS = "";
+    public static String TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS_IMPL = "";
     public static String TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = "";
     public static String TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE = "";
     public static String TOMCAT_PATH_OUT_PUT_SERVER_POM = "";
     public static String TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG = "";
 
     public static String PROJECT_OUTPUT = "";
+
+
+    public static String GENERATE_APP = "";
+    public static String GENERATE_JS = "";
+    public static String GENERATE_CSS = "";
+    public static String GENERATE_BITMAPS = "";
+    public static String GENERATE_JSP_PAGES = "";
 }

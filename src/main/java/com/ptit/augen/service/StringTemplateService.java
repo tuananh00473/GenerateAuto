@@ -133,7 +133,7 @@ public class StringTemplateService
         String content = template.toString();
         String fileName = "index.jsp";
 
-        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_OTHER_INDEX, fileName, content);
+        JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_OTHER_JSP_PAGES, fileName, content);
     }
 
     public static void generateIndexJS(ArrayList<Table> tables)
@@ -214,12 +214,11 @@ public class StringTemplateService
         JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateServiceInterface(String path, String packageName, String tableName, String typeKey)
+    public static void generateServiceInterface(String path, String packageName, String tableName)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("ServiceInterface");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tableName", tableName);
-        template.setAttribute("typeKey", typeKey);
 
         String content = template.toString();
         String fileName = tableName + "Service.java";
@@ -227,12 +226,11 @@ public class StringTemplateService
         JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateServiceImplements(String path, String packageName, String tableName, String typeKey)
+    public static void generateServiceImplements(String path, String packageName, String tableName)
     {
         StringTemplate template = Constants.groupServer.getInstanceOf("ServiceImpl");
         template.setAttribute("packageName", packageName);
         template.setAttribute("tableName", tableName);
-        template.setAttribute("typeKey", typeKey);
 
         String content = template.toString();
         String fileName = tableName + "ServiceImpl.java";

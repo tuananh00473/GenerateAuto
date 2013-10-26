@@ -18,6 +18,11 @@ Ext.define("AM.controller.InformationOutputPanelController", {
         AM.config.AppConfig.MASK.show();
         Ext.Ajax.request({
             url: '/Connection/GenerateCode',
+            params: {
+                ProjectLocationId: Ext.getCmp('ProjectLocationId').getValue(),
+                ProjectNameId: Ext.getCmp('ProjectNameId').getValue(),
+                BasePackageId: Ext.getCmp('BasePackageId').getValue()
+            },
             success: function (response, opts)
             {
                 AM.config.AppConfig.MASK.hide();
@@ -33,6 +38,7 @@ Ext.define("AM.controller.InformationOutputPanelController", {
                 else
                 {
                     _this.getNotificationService().success("Success", "Generate code successfull !");
+                    _this.getView().close();
                 }
             },
             failure: function (response, opts)

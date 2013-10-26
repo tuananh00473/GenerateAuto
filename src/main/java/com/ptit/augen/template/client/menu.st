@@ -14,7 +14,7 @@ Ext.define('AM.view.menu.TopMenu', {
     items: [$tables:{ table | {
         xtype: 'button',
         text: '$table.TableName$',
-        icon: 'bitmaps/$table.TableName$.png',
+        icon: 'app/bitmaps/$table.TableName$.png',
 		height: 60,
 		width: 90,
 		scale: 'large',

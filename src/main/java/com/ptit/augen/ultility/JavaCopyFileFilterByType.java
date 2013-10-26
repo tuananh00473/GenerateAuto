@@ -71,4 +71,26 @@ public class JavaCopyFileFilterByType
             return (null == fileType) || (pathname.getName().endsWith("." + fileType)) || (pathname.isDirectory());
         }
     }
+
+    public static void copySingleFileWithOtherName(String fromPath, String outputPath, String fileName)
+    {
+        File inputFile = new File(fromPath);
+        JavaMakePath.makePath(outputPath);
+        File outputFile = new File(outputPath + File.separator + fileName);
+        try
+        {
+            InputStream input = new FileInputStream(inputFile);
+            OutputStream out = new FileOutputStream(outputFile);
+            byte data[] = new byte[input.available()];
+            input.read(data);
+            out.write(data);
+            out.flush();
+            out.close();
+            input.close();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -32,7 +32,7 @@ public class Constants
     public static final String TOMCAT_PATH_OUT_PUT_CLIENT_INDEX = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\";
     public static final String TOMCAT_PATH_OUT_PUT_CLIENT_VIEWPORT = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\view\\";
     public static final String TOMCAT_PATH_OUT_PUT_OTHER_COMMON = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\common\\";
-    public static final String TOMCAT_PATH_OUT_PUT_OTHER_INDEX = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app\\";
+    public static final String TOMCAT_PATH_OUT_PUT_OTHER_JSP_PAGES = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\pages\\";
 
     public static final String TOMCAT_PATH_OUT_PUT_TEST = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\test\\";
 
@@ -73,4 +73,15 @@ public class Constants
             "Edit",
             "List"
     ));
+
+    public static final String SRC_MAIN_JAVA = "src\\main\\java";
+    public static final String SRC_MAIN_WEBAPP = "src\\main\\webapp";
+
+    public static final String GENERATE_APP = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\app";
+    public static final String GENERATE_JSP_PAGES = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\pages";
+
+    public static final String GENERATE_JS = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\js";
+    public static final String GENERATE_CSS = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\css";
+    public static final String GENERATE_BITMAPS = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\bitmaps";
+    public static final String GENERATE_MENU_BUTTON = "D:\\qsoft\\setup\\apache-tomcat-6.0.37\\webapps\\ROOT\\sourcegenerated\\Temp\\menubutton\\button.png";
 }

@@ -154,7 +154,7 @@ Ext.define("AM.Application", {
         AM.config.AppConfig.CODE_MIRROR_LIST.on("change", function ()
         {
             clearTimeout(delay);
-            delay = setTimeout(updatePreviewList, 1000);
+            delay = setTimeout(updatePreviewList, 3000);
         });
         Ext.getCmp('centerId').setActiveTab('tabAddId');
         AM.config.AppConfig.APP_LOAD_STATUS = true;
