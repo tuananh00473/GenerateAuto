@@ -131,7 +131,7 @@ public class StringTemplateService
         StringTemplate template = Constants.groupOther.getInstanceOf("index");
 
         String content = template.toString();
-        String fileName = "index.jsp";
+        String fileName = "hello.jsp";
 
         JavaWriteFile.WritToFile(Constants.TOMCAT_PATH_OUT_PUT_OTHER_JSP_PAGES, fileName, content);
     }
@@ -276,17 +276,28 @@ public class StringTemplateService
         JavaWriteFile.WritToFile(path, fileName, content);
     }
 
-    public static void generateServerController(String path, String tableName, ArrayList<Field> listFullFields)
+    public static void generateMainController(String path, String packageName)
     {
-        // viet Controller theo SpringMVC
-//        StringTemplate template = Constants.groupServer.getInstanceOf("controller");
-//        template.setAttribute("tableName", tableName);
-//        template.setAttribute("fields", listFullFields);
-//
-//        String content = template.toString();
-        String fileName = tableName + ".js";
+        StringTemplate template = Constants.groupServer.getInstanceOf("MainController");
+        template.setAttribute("packageName", packageName);
 
-        JavaWriteFile.WritToFile(path, fileName, "");
+        String content = template.toString();
+        String fileName = "HelloController.java";
+
+        JavaWriteFile.WritToFile(path, fileName, content);
+    }
+
+    public static void generateServerController(String path, String packageName, String tableName, ArrayList<Field> fields)
+    {
+        StringTemplate template = Constants.groupServer.getInstanceOf("Controller");
+        template.setAttribute("packageName", packageName);
+        template.setAttribute("tableName", tableName);
+        template.setAttribute("fields", fields);
+
+        String content = template.toString();
+        String fileName = tableName + "Controller.java";
+
+        JavaWriteFile.WritToFile(path, fileName, content);
     }
 
     public static void generateJsonResultEntity(String path, String packageName)

@@ -66,7 +66,7 @@ Ext.define('AM.controller.$tableName$', {
                             Ext.Ajax.request({
                                 url: '/$tableName$/Delete',
                                 params: {
-                                    Id: record.Id
+                                    id: record.id
                                 },
                                 success: function (response, opts) {
                                     var status = response.responseText;

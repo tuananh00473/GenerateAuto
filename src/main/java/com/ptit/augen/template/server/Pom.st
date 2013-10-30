@@ -113,6 +113,18 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>1.0.3.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.10</version>
+        </dependency>
+
+        <!--captcha-->
+        <dependency>
+            <groupId>net.tanesha.recaptcha4j</groupId>
+            <artifactId>recaptcha4j</artifactId>
+            <version>0.0.7</version>
+        </dependency>
     </dependencies>
 
     <build>

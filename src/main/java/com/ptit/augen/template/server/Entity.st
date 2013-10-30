@@ -11,7 +11,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "$tableName$")
-public class $tableName$ {$fields:{ field |
+public class $tableName$  implements Comparable
+{$fields:{ field |
     $if(field.IsKey)$
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,4 +30,16 @@ public class $tableName$ {$fields:{ field |
         return $field.FieldName$;
     }
     }$
+
+    @Override
+    public int compareTo(Object object)
+    {
+        return (int)(this.id - (($tableName$)object).getid());
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.id.toString();
+    }
 }

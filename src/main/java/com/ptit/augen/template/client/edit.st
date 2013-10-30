@@ -15,19 +15,23 @@ Ext.define('AM.view.screen.Edit$tableName$', {
         id: 'formEdit$tableName$Id',
         url: '/$tableName$/Edit',
         layout: 'vbox',
-        items: [{
+        items: [
+        {
             xtype: 'hiddenfield',
-            id: 'Edit$tableName$IdId',
-            name: 'Edit$tableName$IdId'
-        }, {
+            id: 'Edit$tableName$idId',
+            name: 'Edit$tableName$idId'
+        },
+        {
             xtype: 'hiddenfield',
             id: 'Edit$tableName$ChallengeId',
             name: 'Edit$tableName$ChallengeId'
-        }, {
+        },
+        {
             xtype: 'hiddenfield',
             id: 'Edit$tableName$ResponseId',
             name: 'Edit$tableName$ResponseId'
-        }, $fields:{ field | $if(field.IsHTMLEditor)$ {
+        },$fields:{ field | $if(field.IsHTMLEditor)$
+        {
             xtype: 'label',
             text: '$field.LabelName$',
             margin: '5 0 5 10',
@@ -39,8 +43,8 @@ Ext.define('AM.view.screen.Edit$tableName$', {
             height: $field.FieldHeight$,
             border: false,
             html: '<textarea id="tempEdit$tableName$$field.FieldName$Id" name="tempEdit$tableName$$field.FieldName$Id" style="width: 100%; height: $(field.FieldHeight + 10)$px;"></textarea>'
-        }, 
-		$else$ {
+        },$else$
+        {
             xtype: '$field.ItemType$',
             id: 'Edit$tableName$$field.FieldName$Id',
             name: 'Edit$tableName$$field.FieldName$Id',
@@ -50,7 +54,8 @@ Ext.define('AM.view.screen.Edit$tableName$', {
             $if(!field.AllowBlankBoolean)$			emptyText: '$field.LabelName$ không được để trống',$endif$                        
             msgTarget: 'none',
 			$if(field.AllowBlankBoolean)$			fieldLabel: '$field.LabelName$' $else$			fieldLabel: '<b style="color: red;">*</b> $field.LabelName$' $endif$
-        }$endif$};separator=", \n		"$, {
+        }$endif$};separator=",\n"$,
+        {
             xtype: 'panel',
             width: 320,
             height: 130,

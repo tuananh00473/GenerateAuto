@@ -30,14 +30,15 @@ public class GlobalVariables
     public static String projectName = "";
     public static String packageName = "";
 
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_ENTITY = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_DAO = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS_IMPL = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_POM = "";
-    public static String TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG = "";
+    public static String PATH_OUT_PUT_SERVER_ENTITY = "";
+    public static String PATH_OUT_PUT_SERVER_DAO = "";
+    public static String PATH_OUT_PUT_SERVER_BUSINESS = "";
+    public static String PATH_OUT_PUT_SERVER_BUSINESS_IMPL = "";
+    public static String PATH_OUT_PUT_SERVER_MAIN_CONTROLLER = "";
+    public static String PATH_OUT_PUT_SERVER_CONTROLLER = "";
+    public static String PATH_OUT_PUT_SERVER_PERSISTENCE = "";
+    public static String PATH_OUT_PUT_SERVER_POM = "";
+    public static String PATH_OUT_PUT_SERVER_SPRINGCONFIG = "";
 
     public static String PROJECT_OUTPUT = "";
 

@@ -1,6 +1,6 @@
 package $packageName$.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Admin
@@ -9,26 +9,48 @@ import java.util.ArrayList;
  */
 public class JsonResult
 {
-    public String status;
-    public ArrayList data;
+    public int total;
+    public boolean success;
+    public Object data;
+    public boolean statusCaptcha;
 
-    public String getStatus()
+    public int getTotal()
     {
-        return status;
+        return total;
     }
 
-        public void setStatus(String status)
+    public void setTotal(int total)
     {
-        this.status = status;
+        this.total = total;
     }
 
-    public ArrayList getData()
+    public boolean isSuccess()
+    {
+        return success;
+    }
+
+    public void setSuccess(boolean success)
+    {
+        this.success = success;
+    }
+
+    public Object getData()
     {
         return data;
     }
 
-    public void setData(ArrayList data)
+    public void setData(Object data)
     {
         this.data = data;
+    }
+
+    public boolean isStatusCaptcha()
+    {
+        return statusCaptcha;
+    }
+
+    public void setStatusCaptcha(boolean statusCaptcha)
+    {
+        this.statusCaptcha = statusCaptcha;
     }
 }

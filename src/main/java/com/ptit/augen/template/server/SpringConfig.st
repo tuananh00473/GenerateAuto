@@ -18,6 +18,7 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/app/**" location="/app/"/>
     <mvc:resources mapping="/META-INF/**" location="/META-INF/"/>
+
     <context:annotation-config/>
     <context:component-scan base-package="$packageName$"/>
 

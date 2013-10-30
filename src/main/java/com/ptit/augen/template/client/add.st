@@ -19,11 +19,13 @@ Ext.define('AM.view.screen.Add$tableName$', {
             xtype: 'hiddenfield',
             id: 'Add$tableName$ChallengeId',
             name: 'Add$tableName$ChallengeId'
-        }, {
+        },
+        {
             xtype: 'hiddenfield',
             id: 'Add$tableName$ResponseId',
             name: 'Add$tableName$ResponseId'
-        }, $fields:{ field | $if(field.IsHTMLEditor)$ {
+        }, $fields:{ field | $if(field.IsHTMLEditor)$
+        {
             xtype: 'label',
             text: '$field.LabelName$',
             margin: '5 0 5 10',
@@ -35,8 +37,8 @@ Ext.define('AM.view.screen.Add$tableName$', {
             height: $field.FieldHeight$,
             border: false,
             html: '<textarea id="tempAdd$tableName$$field.FieldName$Id" name="tempAdd$tableName$$field.FieldName$Id" style="width: 100%; height: $(field.FieldHeight + 10)$px;"></textarea>'
-        }, 
-		$else$ {
+        },$else$
+		{
             xtype: '$field.ItemType$',
             id: 'Add$tableName$$field.FieldName$Id',
             name: 'Add$tableName$$field.FieldName$Id',
@@ -46,7 +48,8 @@ Ext.define('AM.view.screen.Add$tableName$', {
 			$if(!field.AllowBlankBoolean)$			emptyText: '$field.LabelName$ không được để trống',$endif$                        
             msgTarget: 'none',
 			$if(field.AllowBlankBoolean)$			fieldLabel: '$field.LabelName$' $else$			fieldLabel: '<b style="color: red;">*</b> $field.LabelName$' $endif$            
-        }$endif$};separator=", \n		"$, {
+        }$endif$};separator=", \n		"$,
+        {
             xtype: 'panel',
             width: 320,
             height: 130,
@@ -58,14 +61,16 @@ Ext.define('AM.view.screen.Add$tableName$', {
         xtype: 'toolbar',
         dock: 'bottom',
         ui: 'footer',
-        items: ['->', {
+        items: ['->',
+        {
             xtype: 'button',
             text: 'Thêm',
             handler: function () {
                 Ext.ComponentQuery.query('screenAdd$tableName$')[0].fireEvent('btnSaveClick');
 
             }
-        }, {
+        },
+        {
             xtype: 'button',
             text: 'Đóng',
             handler: function () {

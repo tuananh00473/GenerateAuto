@@ -1,6 +1,6 @@
 package com.ptit.augen.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Admin
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class JsonResult
 {
     public String status;
-    public ArrayList data;
+    public List data;
 
     public String getStatus()
     {
@@ -22,12 +22,12 @@ public class JsonResult
         this.status = status;
     }
 
-    public ArrayList getData()
+    public List getData()
     {
         return data;
     }
 
-    public void setData(ArrayList data)
+    public void setData(List data)
     {
         this.data = data;
     }

@@ -67,16 +67,18 @@ public class MainController
         ArrayList<Table> tables = GlobalVariables.tables;
         for (Table table : tables)
         {
-            StringTemplateService.generateEntity(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_ENTITY, GlobalVariables.packageName, table.getTableName(), table.getFields());
-            StringTemplateService.generateDAO(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_DAO, GlobalVariables.packageName, table.getTableName());
-            StringTemplateService.generateServiceInterface(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS, GlobalVariables.packageName, table.getTableName());
-            StringTemplateService.generateServiceImplements(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS_IMPL, GlobalVariables.packageName, table.getTableName());
+            StringTemplateService.generateEntity(GlobalVariables.PATH_OUT_PUT_SERVER_ENTITY, GlobalVariables.packageName, table.getTableName(), table.getFields());
+            StringTemplateService.generateDAO(GlobalVariables.PATH_OUT_PUT_SERVER_DAO, GlobalVariables.packageName, table.getTableName());
+            StringTemplateService.generateServiceInterface(GlobalVariables.PATH_OUT_PUT_SERVER_BUSINESS, GlobalVariables.packageName, table.getTableName());
+            StringTemplateService.generateServiceImplements(GlobalVariables.PATH_OUT_PUT_SERVER_BUSINESS_IMPL, GlobalVariables.packageName, table.getTableName());
+            StringTemplateService.generateServerController(GlobalVariables.PATH_OUT_PUT_SERVER_CONTROLLER, GlobalVariables.packageName, table.getTableName(), table.getFields());
             JavaCopyFileFilterByType.copySingleFileWithOtherName(Constants.GENERATE_MENU_BUTTON, GlobalVariables.GENERATE_BITMAPS, table.getTableName() + ".png");
         }
-        StringTemplateService.generateJsonResultEntity(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_ENTITY, GlobalVariables.packageName);
-        StringTemplateService.generatePersistence(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE, GlobalVariables.packageName, tables);
-        StringTemplateService.generatePom(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_POM, GlobalVariables.projectName);
-        StringTemplateService.generateSpringConfig(GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG, GlobalVariables.packageName, GlobalVariables.driver, GlobalVariables.ConnString, GlobalVariables.UserID, GlobalVariables.Password);
+        StringTemplateService.generateMainController(GlobalVariables.PATH_OUT_PUT_SERVER_MAIN_CONTROLLER, GlobalVariables.packageName);
+        StringTemplateService.generateJsonResultEntity(GlobalVariables.PATH_OUT_PUT_SERVER_ENTITY, GlobalVariables.packageName);
+        StringTemplateService.generatePersistence(GlobalVariables.PATH_OUT_PUT_SERVER_PERSISTENCE, GlobalVariables.packageName, tables);
+        StringTemplateService.generatePom(GlobalVariables.PATH_OUT_PUT_SERVER_POM, GlobalVariables.projectName);
+        StringTemplateService.generateSpringConfig(GlobalVariables.PATH_OUT_PUT_SERVER_SPRINGCONFIG, GlobalVariables.packageName, GlobalVariables.driver, GlobalVariables.ConnString, GlobalVariables.UserID, GlobalVariables.Password);
 
         JavaCopyFileFilterByType.copy(Constants.ALL_FILE, Constants.GENERATE_APP, GlobalVariables.GENERATE_APP);
         JavaCopyFileFilterByType.copy(Constants.ALL_FILE, Constants.GENERATE_JS, GlobalVariables.GENERATE_JS);
@@ -93,14 +95,15 @@ public class MainController
     {
         String packageDirection = StringExecuteConverter.convertFromPackageToDirection(BasePackageId);
         GlobalVariables.PROJECT_OUTPUT = ProjectLocationId + "\\" + ProjectNameId;
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_ENTITY = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\entity\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_DAO = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\dao\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\business\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS_IMPL = GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_BUSINESS + "\\impl\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_CONTROLLER = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\controller\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_PERSISTENCE = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_WEBAPP + "\\META-INF\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_POM = ProjectLocationId + "\\" + ProjectNameId + "\\";
-        GlobalVariables.TOMCAT_PATH_OUT_PUT_SERVER_SPRINGCONFIG = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_WEBAPP + "\\WEB-INF\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_ENTITY = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\entity\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_DAO = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\dao\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_BUSINESS = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\business\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_BUSINESS_IMPL = GlobalVariables.PATH_OUT_PUT_SERVER_BUSINESS + "\\impl\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_CONTROLLER = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\controller\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_MAIN_CONTROLLER = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_JAVA + "\\" + packageDirection + "\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_PERSISTENCE = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_WEBAPP + "\\META-INF\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_POM = ProjectLocationId + "\\" + ProjectNameId + "\\";
+        GlobalVariables.PATH_OUT_PUT_SERVER_SPRINGCONFIG = ProjectLocationId + "\\" + ProjectNameId + "\\" + Constants.SRC_MAIN_WEBAPP + "\\WEB-INF\\";
 
         GlobalVariables.GENERATE_APP = GlobalVariables.PROJECT_OUTPUT + "\\" + Constants.SRC_MAIN_WEBAPP + "\\app";
         GlobalVariables.GENERATE_JS = GlobalVariables.GENERATE_APP + "\\js";
