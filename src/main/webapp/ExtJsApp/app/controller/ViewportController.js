@@ -16,6 +16,13 @@ Ext.define("AM.controller.ViewportController", {
         btnGenerateCode: {
             click: "onbtnGenerateCodeClick"
         },
+        btnHelp: {
+            click: "onbtnHelpClick"
+        },
+        btnAbout: {
+            click: "onbtnAboutClick"
+        },
+
         centerId: {
             tabchange: "onCenterPanelChange"
         },
@@ -185,5 +192,17 @@ Ext.define("AM.controller.ViewportController", {
                 });
             }
         });
+    },
+    onbtnHelpClick: function ()
+    {
+        Ext.Msg.alert('Help', 'i don\'t know ');
+    },
+    onbtnAboutClick: function ()
+    {
+        var message = 'NAME : Nguyễn Tuấn Anh' +
+            '<br>COMPANY: QsoftVietNam' +
+            '<br>AGE : 22' +
+            '<br>SCHOOL: PTIT';
+        Ext.Msg.alert('About Us', message);
     }
 });
