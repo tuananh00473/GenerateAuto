@@ -21,6 +21,7 @@ public class JavaWriteFile
             BufferedWriter out = new BufferedWriter(fileWriter);
             out.write(content);
             out.close();
+            fileWriter.close();
         }
         catch (Exception e)
         {

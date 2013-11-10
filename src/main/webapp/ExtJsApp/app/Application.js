@@ -195,7 +195,7 @@ Ext.define("AM.Application", {
                 params: {
                     type: 1,
                     tableName: AM.config.AppConfig.COOKIES.get('TableName'),
-                    content: AM.config.AppConfig.CODE_MIRROR_ADD.getValue()
+                    content: AM.config.AppConfig.CODE_MIRROR_EDIT.getValue()
                 },
                 success: function (response, opts)
                 {
@@ -221,7 +221,7 @@ Ext.define("AM.Application", {
                 params: {
                     type: 2,
                     tableName: AM.config.AppConfig.COOKIES.get('TableName'),
-                    content: AM.config.AppConfig.CODE_MIRROR_ADD.getValue()
+                    content: AM.config.AppConfig.CODE_MIRROR_LIST.getValue()
                 },
                 success: function (response, opts)
                 {

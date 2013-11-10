@@ -97,7 +97,7 @@ Ext.define("AM.view.Viewport", {
                         {
                             xtype: 'container',
                             layout: 'fit',
-                            html: '<iframe id="preview" width="100%" height="600px"></iframe>'
+                            html: '<iframe id="preview" width="100%" height="500px"></iframe>'
                         }
                     ]
                 },
