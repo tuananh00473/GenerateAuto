@@ -174,9 +174,9 @@ public class StringTemplateService
     {
         StringTemplate template = Constants.groupTest.getInstanceOf("javascript");
 
-        boolean IsAdd = (Constants.TypeAdd.equals(type)) ? true : false;
-        boolean IsEdit = (Constants.TypeEdit.equals(type)) ? true : false;
-        boolean IsList = (Constants.TypeList.equals(type)) ? true : false;
+        boolean IsAdd = (Constants.TypeAdd.equals(type));
+        boolean IsEdit = (Constants.TypeEdit.equals(type));
+        boolean IsList = (Constants.TypeList.equals(type));
 
         template.setAttribute("IsAdd", IsAdd);
         template.setAttribute("IsEdit", IsEdit);

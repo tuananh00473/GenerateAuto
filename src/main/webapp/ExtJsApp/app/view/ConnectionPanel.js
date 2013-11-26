@@ -48,7 +48,7 @@ Ext.define('AM.view.ConnectionPanel', {
                             xtype: 'textfield',
                             itemId: 'PostgresInitialCatalogId',
                             name: 'PostgresInitialCatalogId',
-                            value: 'simple_db',
+                            value: 'vkmkdido_candimex',
                             labelWidth: 150,
                             width: 500,
                             allowBlank: false,
